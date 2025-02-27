@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 
 import { Product } from "../types";
 import { Button } from "@/components/ui/button";
@@ -25,29 +25,33 @@ export function Home() {
   });
 
   if (isLoading) return <p>Loading products...</p>;
-  
 
   return (
     <div className="App">
-      <h1 className="text-2xl uppercase mb-10">Products</h1>
+      <h1 className="text-2xl uppercase align">Products</h1>
 
-      <ul>
-        {data?.map((products) => 
-        
-        <li key={products.id}>
-      <Card>
-  <CardHeader>
-    <CardTitle>{products.name}</CardTitle>
-    <CardDescription>Card Description</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>Card Content Here</p>
-  </CardContent>
-  <CardFooter>
-  <Button className="text-white bg-blue-500 hover:bg-blue-600" variant="secondary">Add to Cart</Button>
-  </CardFooter>
-</Card>
-          </li>)}
+      <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto'">
+        {data?.map((products) => (
+          <li key={products.id}>
+            <Card >
+              <CardHeader>
+                <CardTitle>{products.name}</CardTitle>
+                <CardDescription>Card Description</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>Card Content Here</p>
+              </CardContent>
+              <CardFooter>
+                <Button
+                  className="text-white bg-blue-500 hover:bg-blue-600"
+                  variant="secondary"
+                >
+                  Add to Cart
+                </Button>
+              </CardFooter>
+            </Card>
+          </li>
+        ))}
       </ul>
 
       {error && <p className="text-red-500">Error: {error.message}</p>}

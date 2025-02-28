@@ -3,8 +3,12 @@ import "./App.css";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Home } from "./Pages/Home";
+import { QueryClient } from "@tanstack/react-query";
+import api from "./api";
 
 function App() {
+
+  const queryClient = new QueryClient()
 
   const [product, setProduct] = useState({
     name: "",
@@ -20,11 +24,24 @@ function App() {
     
   };
 
-  const handleSubmit = (e: any) =>{
+  const postProduct = async ()=>{
+    try{
+      const res = await api.post("/products", product,) //Passing the data as a 2nd param
+      return res.data
+
+    } catch (error) {
+      console.error(error)
+      return Promise.reject(new Error("Something went wrong"))
+    }
+  }
+
+  const handleSubmit = async (e: any) =>{
     e.preventDefault(); // Prevent page refresh
-    console.log("Form submitted!", product); // to print the input values
-    
+    await postProduct()
+    queryClient.invalidateQueries({queryKey: ["products"]})  
   };
+
+  
   return (
     <>
       <div className="App">

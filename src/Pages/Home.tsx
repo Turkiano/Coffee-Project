@@ -9,24 +9,28 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Product } from "../types";
+import { ProductTypes } from "../types";
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
-import { Globalcontext } from "@/App";
+import { GlobalContext } from "@/App";
 
 
 
 export function Home() {
-  const theContext = useContext(Globalcontext);
-  console.log("context: ", theContext);
   
-  const getProducts = async (): Promise<Product[]> => {
+  const context = useContext(GlobalContext)
+  if(!context) throw Error("Context is missing!!")
+    const {state, handleAddToCart} = context
+console.log("Cart: ", state);
+
+  
+  const getProducts = async (): Promise<ProductTypes[]> => {
     const res = await api.get("/products");
     return res.data;
   };
 
   //Queries using constructuring
-  const { data, error, isLoading } = useQuery<Product[]>({
+  const { data, error, isLoading } = useQuery<ProductTypes[]>({
     queryKey: ["products"],
     queryFn: getProducts, //fetching data
   });
@@ -36,8 +40,9 @@ export function Home() {
   return (
     <div className="App">
       <h1 className="text-2xl uppercase align">Products</h1>
-
+      <h3>Cart({state.cart.length})</h3>
       <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto'">
+    
         {data?.map((products) => (
           <li key={products.id}>
             <Card >
@@ -51,7 +56,7 @@ export function Home() {
               <CardFooter>
                 <Button
                   className="text-white bg-blue-500 hover:bg-blue-600"
-                  variant="secondary"
+                  variant="secondary" onClick={()=> handleAddToCart(products)}
                 >
                   Add to Cart
                 </Button>

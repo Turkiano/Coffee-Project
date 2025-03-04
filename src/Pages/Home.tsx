@@ -11,8 +11,15 @@ import {
 
 import { Product } from "../types";
 import { Button } from "@/components/ui/button";
+import { useContext } from "react";
+import { Globalcontext } from "@/App";
+
+
 
 export function Home() {
+  const theContext = useContext(Globalcontext);
+  console.log("context: ", theContext);
+  
   const getProducts = async (): Promise<Product[]> => {
     const res = await api.get("/products");
     return res.data;

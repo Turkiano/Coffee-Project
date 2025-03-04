@@ -41,8 +41,8 @@ export function Dashboard(){
   };
 
     return (
-        <form onSubmit={handleSubmit} className="mt-10 w-1/2 mx-auto">
-        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight mb-3">
+        <form onSubmit={handleSubmit} className="mt-20 w-full mx-auto">
+        <h3 className="m-20 text-2xl font-semibold tracking-tight mb-3">
           Add New Product
         </h3>
         <Input  name="name" onChange={handleChange} type="text" placeholder="Product Name" />

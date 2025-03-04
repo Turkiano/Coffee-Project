@@ -1,8 +1,10 @@
 import api from "@/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ProductTypes } from "@/types";
 
 export function Dashboard(){
 
@@ -40,7 +42,22 @@ export function Dashboard(){
     queryClient.invalidateQueries({queryKey: ["products"]})  
   };
 
+  //to get products from API
+  const getProducts = async (): Promise<ProductTypes[]> => {
+    const res = await api.get("/products");
+    return res.data;
+  };
+
+  //Queries using constructuring
+  const { data: products, error, isLoading } = useQuery<ProductTypes[]>({
+    queryKey: ["products"],
+    queryFn: getProducts, //fetching data
+  });
+
+  if (isLoading) return <p>Loading products...</p>;
+
     return (
+      <>
         <form onSubmit={handleSubmit} className="mt-20 w-full mx-auto">
         <h3 className="m-20 text-2xl font-semibold tracking-tight mb-3">
           Add New Product
@@ -51,5 +68,32 @@ export function Dashboard(){
           Submit
         </Button>
       </form>
+
+      <div>
+      <div>
+    <Table>
+  <TableCaption>A list of your recent Products.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead className="w-[100px]"></TableHead>
+      <TableHead>Name</TableHead>
+      <TableHead>Category Id</TableHead>
+    </TableRow>
+  </TableHeader>
+
+  <TableBody>
+    {products?.map((product)=>(
+      <TableRow key={product.id}>
+      <TableCell className="font-medium"></TableCell>
+      <TableCell>{product.name}</TableCell>
+      <TableCell>{product.categoryId}</TableCell>
+    </TableRow>
+    ))}
+  </TableBody>
+</Table>
+
+    </div>
+      </div>
+      </>
     )
 }

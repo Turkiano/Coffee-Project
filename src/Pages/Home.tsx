@@ -16,6 +16,7 @@ import { GlobalContext } from "@/App";
 
 
 
+
 export function Home() {
   
   const context = useContext(GlobalContext)
@@ -38,6 +39,7 @@ console.log("Cart: ", state);
   if (isLoading) return <p>Loading products...</p>;
 
   return (
+    <>
     <div className="App">
       <h1 className="text-2xl uppercase align">Products</h1>
       <h3>Cart({state.cart.length})</h3>
@@ -68,5 +70,8 @@ console.log("Cart: ", state);
 
       {error && <p className="text-red-500">Error: {error.message}</p>}
     </div>
+
+   
+       </>
   );
 }

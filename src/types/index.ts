@@ -3,3 +3,10 @@ export type ProductTypes = {
     name: string
     categoryId: number
 }
+
+export const  Role = {
+    Admin: "Admin",
+    Customer: "Customer"
+} as const
+
+

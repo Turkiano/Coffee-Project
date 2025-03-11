@@ -5,12 +5,15 @@ import { Home } from "./Pages/Home";
 import "./App.css";
 import { createContext, useState } from "react";
 import { ProductTypes } from "./types";
-
+import { NavBar } from "./Compo/NavBar";
+import { BrowserRouter } from "react-router-dom";
+import { Login } from "./Pages/login";
+import { SignUp } from "./Pages/SignUp";
 
 export type GlobalContextTypes = {
-  state: GlobalStateTypes
-  handleAddToCart: (products: ProductTypes)=>void
-}
+  state: GlobalStateTypes;
+  handleAddToCart: (products: ProductTypes) => void;
+};
 
 export type GlobalStateTypes = {
   cart: ProductTypes[];
@@ -36,6 +39,14 @@ function App() {
       element: <Home />,
     },
     {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/signUp",
+      element: <SignUp />,
+    },
+    {
       path: "/dashboard",
       element: <Dashboard />,
     },
@@ -43,11 +54,14 @@ function App() {
 
   return (
     <>
-      <div className="App">
-        <GlobalContext.Provider value={{ state, handleAddToCart }}>
-          <RouterProvider router={router} />
-        </GlobalContext.Provider>
-      </div>
+      <BrowserRouter>
+        <NavBar />
+        <div className="App">
+          <GlobalContext.Provider value={{ state, handleAddToCart }}>
+            <RouterProvider router={router} />
+          </GlobalContext.Provider>
+        </div>
+      </BrowserRouter>
     </>
   );
 }

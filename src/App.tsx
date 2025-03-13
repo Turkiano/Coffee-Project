@@ -9,6 +9,7 @@ import { NavBar } from "./Compo/NavBar";
 import { BrowserRouter } from "react-router-dom";
 import { Login } from "./Pages/login";
 import { SignUp } from "./Pages/SignUp";
+import { AboutUs } from "./Pages/AboutUs";
 
 export type GlobalContextTypes = {
   state: GlobalStateTypes;
@@ -45,6 +46,10 @@ function App() {
     {
       path: "/signUp",
       element: <SignUp />,
+    },
+    {
+      path: "/aboutUs",
+      element: <AboutUs />,
     },
     {
       path: "/dashboard",

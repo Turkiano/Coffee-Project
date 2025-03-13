@@ -5,11 +5,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Role } from "@/types";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 import { jwtDecode } from "jwt-decode";
-import { Menu } from "lucide-react";
+import { Cart } from "./Cart";
 import { Link } from "react-router-dom";
+
 export function NavBar() {
   const token = localStorage.getItem("token");
   let userRole = null;
@@ -34,67 +39,37 @@ export function NavBar() {
   };
 
   return (
-    <nav className="flex justify-between items-center px-6 py-4 bg-gray-900 text-white shadow-md">
-      {/* Mobile Menu Button */}
-      <div className="md:hidden">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="ghost">
-              <Menu className="w-6 h-6" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="bg-gray-900 text-white p-6">
-            <div className="flex flex-col gap-4">
-              <Link to="/" className="hover:text-gray-300">
-                Home
-              </Link>
-              <Link to="/about" className="hover:text-gray-300">
-                About Us
-              </Link>
-              {userRole === Role.Admin && (
-                <Link to="/dashboard" className="hover:text-gray-300">
-                  Dashboard
-                </Link>
-              )}
-              {token ? (
-                <Button variant="outline" onClick={handleLogout}>
-                  Logout
-                </Button>
-              ) : (
-                <>
-                  <Button variant="outline" asChild>
-                    <Link to="/signUp">Sign Up</Link>
-                  </Button>
-                  <Button asChild>
-                    <Link to="/login">Login</Link>
-                  </Button>
-                </>
-              )}
-            </div>
-          </SheetContent>
-        </Sheet>
-      </div>
-
+    <div className="flex justify-between items-center mx auto border-b p-3 sticky top-0 left-0 bg-background z-50">
       {/* Logo Section */}
       <div>
-        <Link to="/" className="text-xl font-bold">
+        <Link to="/" className="text-xl font-bold ">
           Logo
         </Link>
       </div>
 
-      {/* Desktop Menu Links */}
-      <div className="hidden md:flex gap-6">
-        <Link to="/" className="hover:text-gray-300">
-          Home
-        </Link>
-        <Link to="/about" className="hover:text-gray-300">
-          About Us
-        </Link>
-        {userRole === Role.Admin && (
-          <Link to="/dashboard" className="hover:text-gray-300">
-            Dashboard
-          </Link>
-        )}
+      {/* Navigation Menu (Desktop) */}
+      <div className=" gap-6">
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link to="/">
+                <NavigationMenuLink>Home</NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/aboutUs">
+                <NavigationMenuLink>About Us</NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            {userRole === "Admin" && (
+              <NavigationMenuItem>
+                <Link to="/dashboard">
+                  <NavigationMenuLink>Dashboard</NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            )}
+          </NavigationMenuList>
+        </NavigationMenu>
       </div>
 
       {/* Authentication Section */}
@@ -102,7 +77,7 @@ export function NavBar() {
         {token ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline">Account</Button>
+              <Button>Account</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
@@ -110,7 +85,7 @@ export function NavBar() {
           </DropdownMenu>
         ) : (
           <div className="flex gap-4">
-            <Button variant="outline" asChild>
+            <Button asChild>
               <Link to="/signUp">Sign Up</Link>
             </Button>
             <Button asChild>
@@ -119,6 +94,8 @@ export function NavBar() {
           </div>
         )}
       </div>
-    </nav>
+
+      <Cart/>
+    </div>
   );
 }

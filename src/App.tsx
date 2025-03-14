@@ -1,15 +1,13 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
-
-import { Dashboard } from "./Pages/Dashboard";
-import { Home } from "./Pages/Home";
-import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createContext, useState } from "react";
+
+import "./App.css";
 import { ProductTypes } from "./types";
-import { NavBar } from "./Compo/NavBar";
-import { BrowserRouter } from "react-router-dom";
+import { Home } from "./Pages/Home";
 import { Login } from "./Pages/login";
 import { SignUp } from "./Pages/SignUp";
 import { AboutUs } from "./Pages/AboutUs";
+import { Dashboard } from "./Pages/Dashboard";
 
 export type GlobalContextTypes = {
   state: GlobalStateTypes;
@@ -58,16 +56,12 @@ function App() {
   ]);
 
   return (
-    <>
-      <BrowserRouter>
-        <NavBar />
-        <div className="App">
-          <GlobalContext.Provider value={{ state, handleAddToCart }}>
-            <RouterProvider router={router} />
-          </GlobalContext.Provider>
-        </div>
-      </BrowserRouter>
-    </>
+    <div className="App">
+      <GlobalContext.Provider value={{ state, handleAddToCart }}>
+        {/* Routes */}
+        <RouterProvider router={router} />
+      </GlobalContext.Provider>
+    </div>
   );
 }
 export default App;

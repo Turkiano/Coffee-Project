@@ -13,18 +13,14 @@ import { ProductTypes } from "../types";
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { GlobalContext } from "@/App";
-
-
-
+import { NavBar } from "@/Compo/NavBar";
 
 export function Home() {
-  
-  const context = useContext(GlobalContext)
-  if(!context) throw Error("Context is missing!!")
-    const {state, handleAddToCart} = context
-console.log("Cart: ", state);
+  const context = useContext(GlobalContext);
+  if (!context) throw Error("Context is missing!!");
+  const { state, handleAddToCart } = context;
+  console.log("Cart: ", state);
 
-  
   const getProducts = async (): Promise<ProductTypes[]> => {
     const res = await api.get("/products");
     return res.data;
@@ -40,38 +36,40 @@ console.log("Cart: ", state);
 
   return (
     <>
-    <div className="App">
-      <h1 className="text-2xl uppercase align">Products</h1>
-      <h3>Cart({state.cart.length})</h3>
-      <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto'">
-    
-        {data?.map((products) => (
-          <li key={products.id}>
-            <Card >
-              <CardHeader>
-                <CardTitle>{products.name}</CardTitle>
-                <CardDescription>Card Description</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>Card Content Here</p>
-              </CardContent>
-              <CardFooter>
-                <Button
-                  className="text-white bg-blue-500 hover:bg-blue-600"
-                  variant="secondary" onClick={()=> handleAddToCart(products)}
-                >
-                  Add to Cart
-                </Button>
-              </CardFooter>
-            </Card>
-          </li>
-        ))}
-      </ul>
+      <div className="w-full mt-0 mb-15">
+        <NavBar />
+      </div>
 
-      {error && <p className="text-red-500">Error: {error.message}</p>}
-    </div>
+      <div className="container mx-auto px-4">
+        <h1 className="text-2xl uppercase align">Products</h1>
+        <h3>Cart({state.cart.length})</h3>
+        <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto'">
+          {data?.map((products) => (
+            <li key={products.id}>
+              <Card>
+                <CardHeader>
+                  <CardTitle>{products.name}</CardTitle>
+                  <CardDescription>Card Description</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p>Card Content Here</p>
+                </CardContent>
+                <CardFooter>
+                  <Button
+                    className="text-white bg-blue-500 hover:bg-blue-600"
+                    variant="secondary"
+                    onClick={() => handleAddToCart(products)}
+                  >
+                    Add to Cart
+                  </Button>
+                </CardFooter>
+              </Card>
+            </li>
+          ))}
+        </ul>
 
-   
-       </>
+        {error && <p className="text-red-500">Error: {error.message}</p>}
+      </div>
+    </>
   );
 }

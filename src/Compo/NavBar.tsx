@@ -1,16 +1,13 @@
 import { Button } from "@/components/ui/button";
+import { User } from "lucide-react"; // Importing User Icon
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
+
 import { jwtDecode } from "jwt-decode";
 import { Cart } from "./Cart";
 import { Link } from "react-router-dom";
@@ -39,8 +36,8 @@ export function NavBar() {
   };
 
   return (
-    <div className="flex justify-between items-center mx auto border-b p-3 sticky top-0 left-0 bg-background z-50">
-      {/* Logo Section */}
+<div className="w-full flex justify-between items-center border-b p-3 bg-background z-50">
+{/* Logo Section */}
       <div>
         <Link to="/" className="text-xl font-bold ">
           Logo
@@ -48,32 +45,14 @@ export function NavBar() {
       </div>
 
       {/* Navigation Menu (Desktop) */}
-      <div className=" gap-6">
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <Link to="/">
-                <NavigationMenuLink>Home</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link to="/aboutUs">
-                <NavigationMenuLink>About Us</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            {userRole === "Admin" && (
-              <NavigationMenuItem>
-                <Link to="/dashboard">
-                  <NavigationMenuLink>Dashboard</NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            )}
-          </NavigationMenuList>
-        </NavigationMenu>
+      <div className="hidden md:flex space-x-6">
+        <Link to="/">Home</Link>
+        <Link to="/aboutUs">About Us</Link>
+        {userRole === "Admin" && <Link to="/dashboard">Dashboard</Link>}
       </div>
 
       {/* Authentication Section */}
-      <div className="hidden md:flex">
+      <div className="hidden md:flex space-x-3">
         {token ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -84,18 +63,24 @@ export function NavBar() {
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <div className="flex gap-4">
-            <Button asChild>
-              <Link to="/signUp">Sign Up</Link>
-            </Button>
-            <Button asChild>
-              <Link to="/login">Login</Link>
-            </Button>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">
+              <span className="text-white">👤</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem asChild>
+                <Link to="/signUp">Sign Up</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/login">Login</Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
+        <Cart />
       </div>
-
-      <Cart/>
     </div>
   );
 }

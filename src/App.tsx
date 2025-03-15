@@ -12,6 +12,7 @@ import { Dashboard } from "./Pages/Dashboard";
 export type GlobalContextTypes = {
   state: GlobalStateTypes;
   handleAddToCart: (products: ProductTypes) => void;
+  handleDeleteFromCart: (id: string) => void
 };
 
 export type GlobalStateTypes = {
@@ -30,6 +31,14 @@ function App() {
       ...state,
       cart: [...state.cart, product],
     });
+  };
+
+  const handleDeleteFromCart = (id: string) => {
+    console.log("Deleting item with id:", id); // Debugging
+    setState((prevState) => ({
+      ...prevState,
+      cart: prevState.cart.filter((item) => item.id !== id),
+    }));
   };
 
   const router = createBrowserRouter([
@@ -57,7 +66,7 @@ function App() {
 
   return (
     <div className="App">
-      <GlobalContext.Provider value={{ state, handleAddToCart }}>
+      <GlobalContext.Provider value={{ state, handleAddToCart, handleDeleteFromCart }}>
         {/* Routes */}
         <RouterProvider router={router} />
       </GlobalContext.Provider>

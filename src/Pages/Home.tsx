@@ -11,12 +11,14 @@ import {
 
 import { ProductTypes } from "../types";
 import { Button } from "@/components/ui/button";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { GlobalContext } from "@/App";
 import { NavBar } from "@/Compo/NavBar";
 import { Link } from "react-router-dom";
 
 export function Home() {
+  const [searchBy, setSearchBy] = useState("")
+  console.log("The state: ", searchBy);
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
   const { state, handleAddToCart } = context;
@@ -35,16 +37,23 @@ export function Home() {
 
   if (isLoading) return <p>Loading products...</p>;
 
+  // **Filter Products Based on Search Input**
+  const filteredProducts = data?.filter((product) =>
+    product.name.toLowerCase().includes(searchBy.toLowerCase())
+  );
+
   return (
     <>
       <div className="w-full mt-0 mb-15">
-        <NavBar />
+        <NavBar searchBy={searchBy} setSearchBy={setSearchBy} /> {/* Pass state as prop */}
       </div>
-      <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4">
         <h1 className="text-2xl uppercase align">Products</h1>
-
+       <div className="mt-10 text-green-500">
+       {filteredProducts?.length === 0 && <p> No products found, search for other names</p>}
+       </div>
         <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto'">
-          {data?.map((product) => {
+          {filteredProducts?.map((product) => {
             return (
               <li key={product.productId}>
                 <Card>

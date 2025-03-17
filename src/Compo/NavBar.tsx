@@ -1,21 +1,21 @@
 import { Button } from "@/components/ui/button";
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import { jwtDecode } from "jwt-decode";
 import { Cart } from "./Cart";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, } from "react";
 
-export function NavBar() {
-  const [searchBy, setSearchBy] = useState("")
-  console.log("The state: ", searchBy);
+
+interface NavBarProps {
+  searchBy: string;
+  setSearchBy: (value: string) => void;
+}
+
+export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
+    
+   
+  
   
   const token = localStorage.getItem("token");
   let userRole = null;
@@ -32,16 +32,17 @@ export function NavBar() {
       console.error("Invalid Token:", error);
     }
   }
+  
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/login";
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>)=>{
-    const {value} = e.target
-    setSearchBy(value)
-  }
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchBy(e.target.value);
+  };
+
 
   return (
     <div className="w-full flex justify-between items-center border-b p-3 bg-background z-50">
@@ -59,9 +60,15 @@ export function NavBar() {
         <Link to="/aboutUs">About Us</Link>
         {userRole === "Admin" && <Link to="/dashboard">Dashboard</Link>}
       </div>
-      <div className="w-1/7 mr-5">
-          <Input type="search" placeholder="Search for products" onChange={handleChange}/>
-        </div>
+       {/* Search Input */}
+       <div className="w-1/7 mr-5">
+        <Input
+          type="search"
+          placeholder="Search for products"
+          value={searchBy} // Controlled input
+          onChange={handleChange}
+        />
+      </div>
       {/* Authentication Section */}
       <div className="hidden md:flex space-x-3">
         {token ? (

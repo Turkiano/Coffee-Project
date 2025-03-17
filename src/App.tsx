@@ -8,6 +8,7 @@ import { Login } from "./Pages/login";
 import { SignUp } from "./Pages/SignUp";
 import { AboutUs } from "./Pages/AboutUs";
 import { Dashboard } from "./Pages/Dashboard";
+import { ProductDetails } from "./Pages/ProductDetails";
 
 export type GlobalContextTypes = {
   state: GlobalStateTypes;
@@ -37,7 +38,7 @@ function App() {
     console.log("Deleting item with id:", id); // Debugging
     setState((prevState) => ({
       ...prevState,
-      cart: prevState.cart.filter((item) => item.id !== id),
+      cart: prevState.cart.filter((item) => item.productId !== id), //we had to update the delete cart function
     }));
   };
 
@@ -61,6 +62,10 @@ function App() {
     {
       path: "/dashboard",
       element: <Dashboard />,
+    },
+    {
+      path: "/products/:productId",
+      element: <ProductDetails />,
     },
   ]);
 

@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { GlobalContext } from "@/App";
 import { NavBar } from "@/Compo/NavBar";
+import { Link } from "react-router-dom";
 
 export function Home() {
   const context = useContext(GlobalContext);
@@ -23,6 +24,8 @@ export function Home() {
 
   const getProducts = async (): Promise<ProductTypes[]> => {
     const res = await api.get("/products");
+    console.log("API Response:", res.data);  // Debugging
+
     return res.data;
   };
 
@@ -39,35 +42,37 @@ export function Home() {
       <div className="w-full mt-0 mb-15">
         <NavBar />
       </div>
-
       <div className="container mx-auto px-4">
         <h1 className="text-2xl uppercase align">Products</h1>
-        <h3>Cart({state.cart.length})</h3>
-        <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto'">
-          {data?.map((products) => (
-            <li key={products.id}>
-              <Card>
-                <CardHeader>
-                  <CardTitle>{products.name}</CardTitle>
-                  <CardDescription>Card Description</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>Card Content Here</p>
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    className="text-white bg-blue-500 hover:bg-blue-600"
-                    variant="secondary"
-                    onClick={() => handleAddToCart(products)}
-                  >
-                    Add to Cart
-                  </Button>
-                </CardFooter>
-              </Card>
-            </li>
-          ))}
-        </ul>
 
+        <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto'">
+          {data?.map((product) => {
+            return (
+              <li key={product.productId}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{product.name}</CardTitle>
+                    <CardDescription>Card Description</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>Card Content Here</p>
+                  </CardContent>
+                  <CardFooter className="flex justify-center space-x-4">
+                    <Button asChild variant="outline" className="text-black">
+                      <Link to={`/products/${product.productId}`}>Details</Link>
+                    </Button>
+                    <Button
+                      className="text-white"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      Add to 🛒
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </li>
+            );
+          })}
+        </ul>
         {error && <p className="text-red-500">Error: {error.message}</p>}
       </div>
     </>

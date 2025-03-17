@@ -1,7 +1,8 @@
+
 export type ProductTypes = {
-    id: string
+    productId: string//change it from id to productId
     name: string
-    categoryId: number
+    categoryId: string
 }
 
 export const  Role = {

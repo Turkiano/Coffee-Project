@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { User } from "lucide-react"; // Importing User Icon
 
 import {
   DropdownMenu,
@@ -11,8 +10,13 @@ import {
 import { jwtDecode } from "jwt-decode";
 import { Cart } from "./Cart";
 import { Link } from "react-router-dom";
+import { Input } from "@/components/ui/input";
+import { ChangeEvent, useState } from "react";
 
 export function NavBar() {
+  const [searchBy, setSearchBy] = useState("")
+  console.log("The state: ", searchBy);
+  
   const token = localStorage.getItem("token");
   let userRole = null;
 
@@ -20,7 +24,6 @@ export function NavBar() {
   if (token) {
     try {
       const decodedToken: any = jwtDecode(token);
-      console.log("Decoded Token:", decodedToken);
       userRole =
         decodedToken[
           "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
@@ -35,22 +38,30 @@ export function NavBar() {
     window.location.href = "/login";
   };
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>)=>{
+    const {value} = e.target
+    setSearchBy(value)
+  }
+
   return (
-<div className="w-full flex justify-between items-center border-b p-3 bg-background z-50">
-{/* Logo Section */}
+    <div className="w-full flex justify-between items-center border-b p-3 bg-background z-50">
+      {/* Logo Section */}
       <div>
         <Link to="/" className="text-xl font-bold ">
           Logo
         </Link>
       </div>
+      
 
       {/* Navigation Menu (Desktop) */}
-      <div className="hidden md:flex space-x-6">
+      <div className="hidden md:flex space-x-6 mx-auto">
         <Link to="/">Home</Link>
         <Link to="/aboutUs">About Us</Link>
         {userRole === "Admin" && <Link to="/dashboard">Dashboard</Link>}
       </div>
-
+      <div className="w-1/7 mr-5">
+          <Input type="search" placeholder="Search for products" onChange={handleChange}/>
+        </div>
       {/* Authentication Section */}
       <div className="hidden md:flex space-x-3">
         {token ? (
@@ -66,7 +77,7 @@ export function NavBar() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline">
-              <span className="text-white">👤</span>
+                <span className="text-white">👤</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -79,6 +90,7 @@ export function NavBar() {
             </DropdownMenuContent>
           </DropdownMenu>
         )}
+        
         <Cart />
       </div>
     </div>

@@ -35,7 +35,6 @@ function App() {
   };
 
   const handleDeleteFromCart = (id: string) => {
-    console.log("Deleting item with id:", id); // Debugging
     setState((prevState) => ({
       ...prevState,
       cart: prevState.cart.filter((item) => item.productId !== id), //we had to update the delete cart function

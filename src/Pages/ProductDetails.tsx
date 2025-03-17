@@ -13,7 +13,6 @@ export function ProductDetails() {
     try {
       if (params.productId) {
         const res = await api.get(`/products/${params.productId}`) //adjust the end-point
-        console.log("API Response:", res.data);  // Debugging
 
         return res.data
       }

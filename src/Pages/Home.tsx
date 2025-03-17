@@ -20,11 +20,9 @@ export function Home() {
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
   const { state, handleAddToCart } = context;
-  console.log("Cart: ", state);
 
   const getProducts = async (): Promise<ProductTypes[]> => {
     const res = await api.get("/products");
-    console.log("API Response:", res.data);  // Debugging
 
     return res.data;
   };

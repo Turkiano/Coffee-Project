@@ -62,7 +62,7 @@ export function Home() {
                     <CardDescription>Card Description</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p>Card Content Here</p>
+                    <p>SAR {product.price}</p>
                   </CardContent>
                   <CardFooter className="flex justify-center space-x-4">
                     <Button asChild variant="outline" className="text-black">

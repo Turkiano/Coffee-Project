@@ -4,6 +4,7 @@ import api from '@/api';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { NavBar } from '@/Compo/NavBar';
 
 
 export function Login() {
@@ -51,9 +52,13 @@ export function Login() {
   
 
   return (
-    <div className="loginContainer">
+    
+    <div className="m-0">
+  <div className=" ">
+
     <h1>Login Page</h1>
-    <div className="loginForm">
+  </div>
+    <div className="w-1/3 m-auto mt-10">
       <form action="POST" onSubmit={handleSubmit}>
         <div>
           <div className="mb-4">
@@ -76,12 +81,12 @@ export function Login() {
               placeholder="Password"
               onChange={handleChange}
               required
-            />
+              />
           </div>
         </div>
         <Button type="submit">Login</Button>
         <p>
-          Create an Account <Link to="/signUp"> here</Link>
+          Create an Account <Link to="/signUp" className='text-blue-600'> here</Link>
         </p>
       </form>
     </div>

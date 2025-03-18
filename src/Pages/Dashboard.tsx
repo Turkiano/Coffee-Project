@@ -2,44 +2,48 @@ import api from "@/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { QueryClient, useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ChangeEvent, FormEvent, useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { ProductTypes } from "@/types";
 
-export function Dashboard(){
-
-
-  const queryClient = new QueryClient()
+export function Dashboard() {
+  const queryClient = new QueryClient();
 
   const [product, setProduct] = useState({
     name: "",
-    categoryId: ""
-  })
+    categoryId: "",
+  });
 
-  const handleChange = (e: any) =>{
-    const {name, value} = e.target
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setProduct({
       ...product,
-      [name]: value
-    })
-    
+      [name]: value,
+    });
   };
 
-  const postProduct = async ()=>{
-    try{
-      const res = await api.post("/products", product,) //Passing the data as a 2nd param
-      return res.data
-
+  const postProduct = async () => {
+    try {
+      const res = await api.post("/products", product); //Passing the data as a 2nd param
+      return res.data;
     } catch (error) {
-      console.error(error)
-      return Promise.reject(new Error("Something went wrong"))
+      console.error(error);
+      return Promise.reject(new Error("Something went wrong"));
     }
-  }
+  };
 
-  const handleSubmit = async (e: any) =>{
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault(); // Prevent page refresh~
-    await postProduct() //send the dada to the backend
-    queryClient.invalidateQueries({queryKey: ["products"]})  
+    await postProduct(); //send the dada to the backend
+    queryClient.invalidateQueries({ queryKey: ["products"] });
   };
 
   //to get products from API
@@ -49,51 +53,71 @@ export function Dashboard(){
   };
 
   //Queries using constructuring
-  const { data: products, error, isLoading } = useQuery<ProductTypes[]>({
+  const {
+    data: products,
+    error,
+    isLoading,
+  } = useQuery<ProductTypes[]>({
     queryKey: ["products"],
     queryFn: getProducts, //fetching data
   });
 
   if (isLoading) return <p>Loading products...</p>;
 
-    return (
-      <>
-        <form onSubmit={handleSubmit} className="mt-20 w-full mx-auto">
-        <h3 className="m-20 text-2xl font-semibold tracking-tight mb-3">
-          Add New Product
-        </h3>
-        <Input  name="name" onChange={handleChange} type="text" placeholder="Product Name" />
-        <Input  name="categoryId" onChange={handleChange} className="mt-3" type="text" placeholder="Category Id" />
-        <Button  className="mt-3" type="submit">
-          Submit
-        </Button>
-      </form>
+  return (
+    <>
+      <div className="">
+        <form onSubmit={handleSubmit} className="w-1/3 mx-auto">
+          <h3 className="text-2xl font-semibold tracking-tight mb-3">
+            Add New Product
+          </h3>
+          <Input
+            name="name"
+            onChange={handleChange}
+            type="text"
+            placeholder="Product Name"
+          />
+          <Input
+            name="categoryId"
+            onChange={handleChange}
+            className="mt-3"
+            type="text"
+            placeholder="Category Id"
+          />
+          <Button className="mt-3" type="submit">
+            Submit
+          </Button>
+        </form>
 
-      <div>
-      <div>
-    <Table>
-  <TableCaption>A list of your recent Products.</TableCaption>
-  <TableHeader>
-    <TableRow>
-      <TableHead className="w-[100px]"></TableHead>
-      <TableHead>Name</TableHead>
-      <TableHead>Category Id</TableHead>
-    </TableRow>
-  </TableHeader>
+        <div>
+          <div className="scroll-m-20 text-4xl my-10 font-semibold tracking-tight">
+            <Table>
+              <TableCaption>A list of your recent Products.</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-right">Name</TableHead>
+                  <TableHead className="text-right">Category Id</TableHead>
+                  <TableHead className="text-right">Price</TableHead>
 
-  <TableBody>
-    {products?.map((product)=>(
-      <TableRow key={product.id}>
-      <TableCell className="font-medium"></TableCell>
-      <TableCell>{product.name}</TableCell>
-      <TableCell>{product.categoryId}</TableCell>
-    </TableRow>
-    ))}
-  </TableBody>
-</Table>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {products?.map((product) => (
+                  <TableRow key={product.productId}>
+                    <TableCell></TableCell>
+                    <TableCell className=" ">{product.name}</TableCell>
+                    <TableCell className="">
+                      {product.categoryId}
+                    </TableCell>
+                    <TableCell className=" ">SAR {product.price}</TableCell>
 
-    </div>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
       </div>
-      </>
-    )
+    </>
+  );
 }

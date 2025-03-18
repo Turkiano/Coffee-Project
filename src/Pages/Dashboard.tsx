@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Alert } from "@/Compo/Alert";
 
 export function Dashboard() {
   const queryClient = new QueryClient();
@@ -32,6 +33,22 @@ export function Dashboard() {
     });
   };
 
+  const handleDeleteProduct = async (id: string) => {
+    await deleteProduct(id)
+    queryClient.invalidateQueries({ queryKey: ["products"] });
+  }
+
+  const deleteProduct = async (id: string) => {
+    try {
+      const res = await api.delete(`/products/ ${id}`); 
+      return res.data;
+    } catch (error) {
+      console.error(error);
+      return Promise.reject(new Error("Something went wrong"));
+    }
+  };
+
+  
   const postProduct = async () => {
     try {
       const res = await api.post("/products", product); //Passing the data as a 2nd param
@@ -106,12 +123,15 @@ export function Dashboard() {
                   <TableCaption>A list of your recent Products.</TableCaption>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-right ">Name</TableHead>
-                      <TableHead className="text-right ">Image</TableHead>
-                      <TableHead className="text-right">Category Id</TableHead>
-                      <TableHead className="text-right">Price</TableHead>
-                      <TableHead className="text-right">Product Id</TableHead>
-                      <TableHead className="text-right">Quantity</TableHead>
+                      <TableHead className=" "></TableHead>
+                      <TableHead className="text-left ">Name</TableHead>
+                      <TableHead className="text-left ">Image</TableHead>
+                      <TableHead className="text-left">Category Id</TableHead>
+                      <TableHead className="text-left">Price</TableHead>
+                      <TableHead className="text-left">Product Id</TableHead>
+                      <TableHead className="text-left">Quantity</TableHead>
+                      <TableHead className="text-left">Action</TableHead>
+
 
 
                     </TableRow>
@@ -127,6 +147,10 @@ export function Dashboard() {
                         <TableCell className=" text-left ">SAR {product.price}</TableCell>
                         <TableCell className="text-left">{product.productId}</TableCell>
                         <TableCell className="text-left">{product.quantity}</TableCell>
+                        <TableCell className="text-left">
+                          <Alert />
+                        </TableCell>
+
 
 
                       </TableRow>

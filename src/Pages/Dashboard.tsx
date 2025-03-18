@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useState } from "react";
+
+import { ProductTypes } from "@/types";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table,
   TableBody,
@@ -12,7 +15,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ProductTypes } from "@/types";
 
 export function Dashboard() {
   const queryClient = new QueryClient();
@@ -89,33 +91,51 @@ export function Dashboard() {
           </Button>
         </form>
 
-        <div>
-          <div className="scroll-m-20 text-4xl my-10 font-semibold tracking-tight">
-            <Table>
-              <TableCaption>A list of your recent Products.</TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-right">Name</TableHead>
-                  <TableHead className="text-right">Category Id</TableHead>
-                  <TableHead className="text-right">Price</TableHead>
+        <div >
+          <Tabs defaultValue="products" className="mx-auto">
+            <TabsList >
+              <TabsTrigger value="users" className="text-white gap-7">Users</TabsTrigger>
+              <TabsTrigger value="products" className="text-white gap-5">Products</TabsTrigger>
+            </TabsList>
+            <TabsContent value="users">
+              Make changes to your account here.
+            </TabsContent>
+            <TabsContent value="products">
+              <div className="scroll-m-20 text-4xl my-10 font-semibold tracking-tight">
+                <Table>
+                  <TableCaption>A list of your recent Products.</TableCaption>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-right ">Name</TableHead>
+                      <TableHead className="text-right ">Image</TableHead>
+                      <TableHead className="text-right">Category Id</TableHead>
+                      <TableHead className="text-right">Price</TableHead>
+                      <TableHead className="text-right">Product Id</TableHead>
+                      <TableHead className="text-right">Quantity</TableHead>
 
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {products?.map((product) => (
-                  <TableRow key={product.productId}>
-                    <TableCell></TableCell>
-                    <TableCell className=" ">{product.name}</TableCell>
-                    <TableCell className="">
-                      {product.categoryId}
-                    </TableCell>
-                    <TableCell className=" ">SAR {product.price}</TableCell>
 
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {products?.map((product) => (
+                      <TableRow key={product.productId}>
+                        <TableCell></TableCell>
+                        <TableCell className="text-left ">{product.name}</TableCell>
+                        <TableCell className="text-left ">{product.image}</TableCell>
+
+                        <TableCell className="text-left ">{product.categoryId}</TableCell>
+                        <TableCell className=" text-left ">SAR {product.price}</TableCell>
+                        <TableCell className="text-left">{product.productId}</TableCell>
+                        <TableCell className="text-left">{product.quantity}</TableCell>
+
+
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>{" "}
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </>

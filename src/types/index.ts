@@ -4,6 +4,9 @@ export type ProductTypes = {
     name: string
     categoryId: string
     price: number
+    image: string
+    quantity: number
+    createdAt: string
 }
 
 export const  Role = {

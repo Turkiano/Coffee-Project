@@ -9,8 +9,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { ProductTypes } from "@/types";
 
-export function Alert({ onConfirm }: { onConfirm: () => void }) {
+interface AlertProps {
+  product: ProductTypes;
+  onConfirm: () => void;
+}
+
+export function Alert({ product, onConfirm }: AlertProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600">
@@ -19,7 +25,7 @@ export function Alert({ onConfirm }: { onConfirm: () => void }) {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Are you sure want to delete this product?
+            Are you sure want to delete this product {product.name}?
           </AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete your

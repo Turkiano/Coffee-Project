@@ -16,6 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Alert } from "@/Compo/Alert";
+import { EditProduct } from "@/Compo/EditProduct";
 
 export function Dashboard() {
   const queryClient = useQueryClient();
@@ -59,16 +60,17 @@ export function Dashboard() {
     }
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault(); // Prevent page refresh~
-    await postProduct(); //send the dada to the backend
-    queryClient.invalidateQueries({ queryKey: ["products"] });
-  };
+  
 
   //to get products from API
   const getProducts = async (): Promise<ProductTypes[]> => {
     const res = await api.get("/products");
     return res.data;
+  };
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault(); // Prevent page refresh~
+    await postProduct(); //send the dada to the backend
+    queryClient.invalidateQueries({ queryKey: ["products"] });
   };
 
   //Queries using constructuring
@@ -128,7 +130,9 @@ export function Dashboard() {
                       <TableHead className="text-left">Price</TableHead>
                       <TableHead className="text-left">Product Id</TableHead>
                       <TableHead className="text-left">Quantity</TableHead>
+                      <TableHead className="text-left">Update</TableHead>
                       <TableHead className="text-left">Action</TableHead>
+
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -141,7 +145,9 @@ export function Dashboard() {
                         <TableCell className=" text-left ">SAR {product.price}</TableCell>
                         <TableCell className="text-left">{product.productId}</TableCell>
                         <TableCell className="text-left">{product.quantity}</TableCell>
-                        <TableCell className="text-left"><Alert onConfirm={() => handleDeleteProduct(product.productId)}/></TableCell>
+                        <TableCell className="text-left text-white"><EditProduct product={product}/></TableCell>
+                        <TableCell className="text-left">  <Alert product={product} onConfirm={() => handleDeleteProduct(product.productId)} /></TableCell>
+
                       </TableRow>
                     ))}
                   </TableBody>

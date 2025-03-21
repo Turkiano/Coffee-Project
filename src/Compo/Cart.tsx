@@ -19,6 +19,13 @@ export function Cart() {
     return { ...acc, [key]: [...curGroup, obj] };
   }, {});
 
+
+  //to get the total cart
+  let total = 0;
+  state.cart.forEach(item =>{
+    total += item.price
+  })
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -43,29 +50,33 @@ export function Cart() {
                 key={product.productId}
                 className="flex justify-between items-center border-b py-2"
               >
-                <h4 className="flex items-center gap-1">
-                  {product.name}
-                </h4>
-                <Button
-                className="text-white"
-                  variant="outline"
-                  onClick={() => handleAddToCart(product)}
-                >
-                  +
-                </Button>
+                <div className="justify-between">
+
+                <h4 className="flex items-center gap-1">{product.name}</h4>
+                <h3>SAR {product.price}</h3>
+                </div>
+              
+                  <Button
+                    className="text-white"
+                    variant="outline"
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    +
+                  </Button>
                   <span className="font-bold flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full">
                     ({products.length})
                   </span>
-                <Button
-                 className="text-white"
-                  variant="outline"
-                  onClick={() => handleDeleteFromCart(product.productId)}
-                >
-                  -
-                </Button>
+                  <Button
+                    className="text-white"
+                    variant="outline"
+                    onClick={() => handleDeleteFromCart(product.productId)}
+                  >
+                    -
+                  </Button>
               </div>
             );
           })}
+          <p className="leading-none font-semibold mt-3"> Total: SAR {total}</p>
         </div>
       </PopoverContent>
     </Popover>

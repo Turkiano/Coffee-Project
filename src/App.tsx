@@ -27,7 +27,13 @@ function App() {
     cart: [],
   });
 
+
+
+
   const handleAddToCart = (product: ProductTypes) => {
+    // const isDuplicated = state.cart.find((cartItem) => cartItem.productId === product.productId)
+    // if (isDuplicated) return // to check if cart item is duplicated targeting id.
+
     setState({
       ...state,
       cart: [...state.cart, product],
@@ -35,10 +41,15 @@ function App() {
   };
 
   const handleDeleteFromCart = (id: string) => {
-    setState((prevState) => ({
-      ...prevState,
-      cart: prevState.cart.filter((item) => item.productId !== id), //we had to update the delete cart function
-    }));
+    const cart = state.cart
+    const index = state.cart.findIndex(item => item.productId === id)
+    cart.splice(index,1)
+
+    setState({
+      ...state,
+      cart: cart
+    })
+
   };
 
   const router = createBrowserRouter([

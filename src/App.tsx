@@ -14,6 +14,7 @@ export type GlobalContextTypes = {
   state: GlobalStateTypes;
   handleAddToCart: (products: ProductTypes) => void;
   handleDeleteFromCart: (id: string) => void
+  handleRemoveFromCart: () => void
 };
 
 export type GlobalStateTypes = {
@@ -31,8 +32,7 @@ function App() {
 
 
   const handleAddToCart = (product: ProductTypes) => {
-    // const isDuplicated = state.cart.find((cartItem) => cartItem.productId === product.productId)
-    // if (isDuplicated) return // to check if cart item is duplicated targeting id.
+   
 
     setState({
       ...state,
@@ -48,6 +48,15 @@ function App() {
     setState({
       ...state,
       cart: cart
+    })
+
+  };
+
+  const handleRemoveFromCart = () => {
+   
+    setState({
+      ...state,
+      cart: []
     })
 
   };
@@ -81,7 +90,7 @@ function App() {
 
   return (
     <div className="App">
-      <GlobalContext.Provider value={{ state, handleAddToCart, handleDeleteFromCart }}>
+      <GlobalContext.Provider value={{ state, handleAddToCart, handleDeleteFromCart, handleRemoveFromCart }}>
         {/* Routes */}
         <RouterProvider router={router} />
       </GlobalContext.Provider>

@@ -13,7 +13,7 @@ import { useContext } from "react";
 export function Cart() {
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
-  const { state, handleDeleteFromCart, handleAddToCart } = context;
+  const { state, handleDeleteFromCart, handleAddToCart, handleRemoveFromCart } = context;
 
   const groups = state.cart.reduce((acc, obj) => {
     const key = obj.productId;
@@ -28,7 +28,7 @@ export function Cart() {
   });
 
   const checkoutOrder: OrderTypes = {
-    userId: "3878983a-85de-4f53-abab-5b9d9f9c2625",
+    userId: "51f3f8e0-92df-4358-bcd8-5fe33a60f2ce",
     status: "Processing",
     items: [],
   };
@@ -55,6 +55,10 @@ export function Cart() {
           authorization: `bearer ${token}`
         }
       })
+
+      if (res.status === 201) {
+        handleRemoveFromCart()
+      }
       
       return res.data
     } catch (error) {

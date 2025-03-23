@@ -60,8 +60,6 @@ export function Dashboard() {
     }
   };
 
-  
-
   //to get products from API
   const getProducts = async (): Promise<ProductTypes[]> => {
     const res = await api.get("/products");
@@ -113,10 +111,16 @@ export function Dashboard() {
         <div>
           <Tabs defaultValue="products" className="mx-auto">
             <TabsList>
-              <TabsTrigger value="users" className="text-white gap-7">Users</TabsTrigger>
-              <TabsTrigger value="products" className="text-white gap-5">Products</TabsTrigger>
+              <TabsTrigger value="users" className="text-white gap-7">
+                Users
+              </TabsTrigger>
+              <TabsTrigger value="products" className="text-white gap-5">
+                Products
+              </TabsTrigger>
             </TabsList>
-            <TabsContent value="users">Make changes to your account here.</TabsContent>
+            <TabsContent value="users">
+              Make changes to your account here.
+            </TabsContent>
             <TabsContent value="products">
               <div className="scroll-m-20 text-4xl my-10 font-semibold tracking-tight">
                 <Table>
@@ -132,22 +136,42 @@ export function Dashboard() {
                       <TableHead className="text-left">Quantity</TableHead>
                       <TableHead className="text-left">Update</TableHead>
                       <TableHead className="text-left">Action</TableHead>
-
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {products?.map((product) => (
                       <TableRow key={product.productId}>
                         <TableCell></TableCell>
-                        <TableCell className="text-left ">{product.name}</TableCell>
-                        <TableCell className="text-left ">{product.image}</TableCell>
-                        <TableCell className="text-left ">{product.categoryId}</TableCell>
-                        <TableCell className=" text-left ">SAR {product.price}</TableCell>
-                        <TableCell className="text-left">{product.productId}</TableCell>
-                        <TableCell className="text-left">{product.quantity}</TableCell>
-                        <TableCell className="text-left text-white"><EditProduct product={product}/></TableCell>
-                        <TableCell className="text-left">  <Alert product={product} onConfirm={() => handleDeleteProduct(product.productId)} /></TableCell>
-
+                        <TableCell className="text-left ">
+                          {product.name}
+                        </TableCell>
+                        <TableCell className="text-left ">
+                          {product.image}
+                        </TableCell>
+                        <TableCell className="text-left ">
+                          {product.categoryId}
+                        </TableCell>
+                        <TableCell className=" text-left ">
+                          SAR {product.price}
+                        </TableCell>
+                        <TableCell className="text-left">
+                          {product.productId}
+                        </TableCell>
+                        <TableCell className="text-left">
+                          {product.quantity}
+                        </TableCell>
+                        <TableCell className="text-left text-white">
+                          <EditProduct product={product} />
+                        </TableCell>
+                        <TableCell className="text-left">
+                          {" "}
+                          <Alert
+                            product={product}
+                            onConfirm={() =>
+                              handleDeleteProduct(product.productId)
+                            }
+                          />
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

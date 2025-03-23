@@ -1,6 +1,6 @@
 
 export type ProductTypes = {
-    productId: string//change it from id to productId
+    productId: string
     name: string
     categoryId: string
     price: number
@@ -15,3 +15,19 @@ export const  Role = {
 } as const
 
 
+export type OrderTypes = {
+    userId: string
+    status: OrderStatus 
+    items: OrderItemTypes []
+}
+
+type OrderStatus = "Pending" | "Processing" | "Completed" | "Cancelled";
+
+
+export type OrderItemTypes = {
+    orderItemsId: string 
+    orderId: string
+    productId: string 
+    quantity: number 
+    price: number
+}

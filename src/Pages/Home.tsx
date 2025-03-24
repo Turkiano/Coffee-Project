@@ -45,7 +45,7 @@ export function Home() {
 
   return (
     <>
-      <div className="w-full mt-0 mb-15">
+      <div className="w-full mt-0 ">
         <NavBar searchBy={searchBy} setSearchBy={setSearchBy} /> {/* Pass state as prop */}
       </div>
       <HeroSection/>

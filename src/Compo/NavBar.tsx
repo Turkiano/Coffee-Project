@@ -5,6 +5,7 @@ import { Cart } from "./Cart";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { ChangeEvent, } from "react";
+import { ModeToggle } from "./mode-toggle";
 
 
 interface NavBarProps {
@@ -97,7 +98,7 @@ export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
             </DropdownMenuContent>
           </DropdownMenu>
         )}
-        
+        <ModeToggle/>
         <Cart />
       </div>
     </div>

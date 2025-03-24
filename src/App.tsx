@@ -9,6 +9,7 @@ import { SignUp } from "./Pages/SignUp";
 import { AboutUs } from "./Pages/AboutUs";
 import { Dashboard } from "./Pages/Dashboard";
 import { ProductDetails } from "./Pages/ProductDetails";
+import { ThemeProvider } from "./Compo/theme-provider";
 
 export type GlobalContextTypes = {
   state: GlobalStateTypes;
@@ -89,12 +90,15 @@ function App() {
   ]);
 
   return (
-    <div className="App">
-      <GlobalContext.Provider value={{ state, handleAddToCart, handleDeleteFromCart, handleRemoveFromCart }}>
-        {/* Routes */}
-        <RouterProvider router={router} />
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <GlobalContext.Provider
+        value={{ state, handleAddToCart, handleDeleteFromCart, handleRemoveFromCart }}
+      >
+        <div className="App">
+          <RouterProvider router={router} />
+        </div>
       </GlobalContext.Provider>
-    </div>
+    </ThemeProvider>
   );
 }
 export default App;

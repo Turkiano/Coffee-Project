@@ -15,6 +15,7 @@ import { useContext, useState } from "react";
 import { GlobalContext } from "@/App";
 import { NavBar } from "@/Compo/NavBar";
 import { Link } from "react-router-dom";
+import HeroSection from "@/Compo/HeroSection";
 
 export function Home() {
   const [searchBy, setSearchBy] = useState("")
@@ -47,6 +48,7 @@ export function Home() {
       <div className="w-full mt-0 mb-15">
         <NavBar searchBy={searchBy} setSearchBy={setSearchBy} /> {/* Pass state as prop */}
       </div>
+      <HeroSection/>
             <div className="container mx-auto px-4">
         <h1 className="text-2xl uppercase align">Products</h1>
        <div className="mt-10 text-green-500">

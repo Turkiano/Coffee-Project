@@ -100,17 +100,17 @@ export function Cart() {
                 </div>
 
                 <Button
-                  className="text-white"
+                  className=" bg-[#141e20] text-white"
                   variant="outline"
                   onClick={() => handleAddToCart(product)}
                 >
                   +
                 </Button>
-                <span className="font-bold flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full">
+                <span className="font-bold flex items-center justify-center w-6 h-6 bg-[#141e20] rounded-full">
                   ({products.length})
                 </span>
                 <Button
-                  className="text-white"
+                  className=" bg-[#141e20] text-white"
                   variant="outline"
                   onClick={() => handleDeleteFromCart(product.productId)}
                 >

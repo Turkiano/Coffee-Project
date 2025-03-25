@@ -7,7 +7,7 @@ export default function HeroSection() {
         className="w-full py-24 md:py-48 lg:py-64 bg-cover bg-center relative"
         style={{
           backgroundImage:
-            "url('https://i.ibb.co/d010k5HR/Flux-Dev-A-steamy-aromatic-cup-of-hot-coffee-stands-out-agains-0.jpg')",
+            "url('https://i.postimg.cc/TYGChPwG/Flux-Dev-A-warm-and-inviting-image-of-three-happy-Saudi-female-2.jpg')",
         }}
       >
         <div className="container px-4 md:px-6">
@@ -17,15 +17,15 @@ export default function HeroSection() {
           <div className="relative z-10 flex flex-col items-center space-y-4 text-center text-white">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                Unleash Your <span className="text-primary">Super</span> Potential
+                BEHIND THE <span className="text-primary">COFFEE</span> 
               </h1>
               <p className="mx-auto max-w-[700px] text-lg md:text-xl">
-                Transform your ideas into reality with our powerful platform. Fast, reliable, and built for the future.
+              Reserve your spot now and treat yourself to the rich aromas, handcrafted drinks, and warm ambiance that make every visit unforgettable!
               </p>
             </div>
             <div className="space-x-4">
               <Button asChild size="lg" className="bg-white text-black">
-                <Link to="/get-started">Get Started</Link>
+                <Link to="/get-started">Book Now</Link>
               </Button>
             </div>
           </div>

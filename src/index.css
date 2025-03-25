@@ -103,15 +103,14 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: #0b161a;
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
+  --card: #0b161a;
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
+  --popover: #0b161a;
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
+  --primary: #d28d54;
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -138,6 +137,17 @@ button:focus-visible {
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
 }
+
+/* Button styles for dark mode */
+.dark button {
+  background-color: #d28d54;
+  color: white;
+}
+
+.dark button:hover {
+  background-color: #bb7d49;
+}
+
 
 @theme inline {
   --color-background: var(--background);

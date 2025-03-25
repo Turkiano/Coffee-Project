@@ -16,6 +16,7 @@ import { GlobalContext } from "@/App";
 import { NavBar } from "@/Compo/NavBar";
 import { Link } from "react-router-dom";
 import HeroSection from "@/Compo/HeroSection";
+import { PromoSection } from "@/Compo/PromoSection";
 
 export function Home() {
   const [searchBy, setSearchBy] = useState("")
@@ -49,7 +50,10 @@ export function Home() {
         <NavBar searchBy={searchBy} setSearchBy={setSearchBy} /> {/* Pass state as prop */}
       </div>
       <HeroSection/>
-            <div className="container mx-auto px-4">
+      
+       <PromoSection/>
+        
+            <div className="container mx-auto px-4 mt-19 mb-19">
         <h1 className="text-2xl uppercase align">Products</h1>
        <div className="mt-10 text-green-500">
        {filteredProducts?.length === 0 && <p> No products found, search for other names</p>}
@@ -67,7 +71,7 @@ export function Home() {
                     <p>SAR {product.price}</p>
                   </CardContent>
                   <CardFooter className="flex justify-center space-x-4">
-                    <Button asChild variant="outline" className="text-black">
+                    <Button asChild variant="outline" className=" bg-[#141e20] text-white">
                       <Link to={`/products/${product.productId}`}>Details</Link>
                     </Button>
                     <Button

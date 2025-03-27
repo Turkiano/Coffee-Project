@@ -1,6 +1,6 @@
 export function PromoSection() {
   return (
-    <section className="bg-[#141e20] text-white py-16 px-6">
+    <section className="bg-[#0b161a] text-white py-16 px-6">
       <div className="text-center">
         <p className="italic text-sm">Special moment</p>
         <h2 className="text-3xl font-bold tracking-wide mt-2">ABOUT US</h2>

@@ -17,6 +17,7 @@ import { NavBar } from "@/Compo/NavBar";
 import { Link } from "react-router-dom";
 import HeroSection from "@/Compo/HeroSection";
 import { PromoSection } from "@/Compo/PromoSection";
+import { AlignCenter } from "lucide-react";
 
 export function Home() {
   const [searchBy, setSearchBy] = useState("")
@@ -53,7 +54,7 @@ export function Home() {
       
        <PromoSection/>
         
-            <div className="container mx-auto px-4 mt-19 mb-19">
+            <div className="container mx-auto px-4 mt-19 mb-19 bg-[#141e20]">
         <h1 className="text-2xl uppercase align">Products</h1>
        <div className="mt-10 text-green-500">
        {filteredProducts?.length === 0 && <p> No products found, search for other names</p>}
@@ -65,6 +66,14 @@ export function Home() {
                 <Card>
                   <CardHeader>
                     <CardTitle>{product.name}</CardTitle>
+                    <CardDescription>
+                    <img
+  src={product.image}
+  alt={product.name}
+  className="w-[200px] h-[100px] object-cover rounded-lg mx-auto"
+/>
+
+                    </CardDescription>
                     <CardDescription>Card Description</CardDescription>
                   </CardHeader>
                   <CardContent>

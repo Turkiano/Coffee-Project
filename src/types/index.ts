@@ -1,4 +1,14 @@
 
+export type UserTypes = {
+    id: string
+    firstName: string
+    lastName: string
+    phone: number
+    email: string
+    role: RoleTypes
+}
+
+
 export type ProductTypes = {
     productId: string
     name: string
@@ -8,6 +18,15 @@ export type ProductTypes = {
     quantity: number
     createdAt: string
 }
+
+export type CategoryTypes = {
+    categoryId: string
+    name: string
+    createdAt: string
+}
+
+// Define a type for Role based on the values of the Role object
+export type RoleTypes = keyof typeof Role;
 
 export const  Role = {
     Admin: "Admin",

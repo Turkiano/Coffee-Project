@@ -20,7 +20,7 @@ import { PromoSection } from "@/Compo/PromoSection";
 import { AlignCenter } from "lucide-react";
 
 export function Home() {
-  const [searchBy, setSearchBy] = useState("")
+  const [searchBy, setSearchBy] = useState("");
   console.log("The state: ", searchBy);
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
@@ -42,24 +42,27 @@ export function Home() {
 
   // **Filter Products Based on Search Input**
   const filteredProducts = data?.filter((product) =>
-    product.name.toLowerCase().includes(searchBy.toLowerCase())
+    product.name.toLowerCase().includes(searchBy.toLowerCase()),
   );
 
   return (
     <>
       <div className="w-full mt-0 ">
-        <NavBar searchBy={searchBy} setSearchBy={setSearchBy} /> {/* Pass state as prop */}
+        <NavBar searchBy={searchBy} setSearchBy={setSearchBy} />{" "}
+        {/* Pass state as prop */}
       </div>
-      <HeroSection/>
-      
-       <PromoSection/>
-        
-            <div className="container mx-auto px-4 mt-19 mb-19 bg-[#141e20]">
+      <HeroSection />
+
+      <PromoSection />
+
+      <div className="px-5  mt-19  bg-[#141e20] w-full">
         <h1 className="text-2xl uppercase align">Products</h1>
-       <div className="mt-10 text-green-500">
-       {filteredProducts?.length === 0 && <p> No products found, search for other names</p>}
-       </div>
-        <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto'">
+        <div className="mt-10 text-green-500">
+          {filteredProducts?.length === 0 && (
+            <p> No products found, search for other names</p>
+          )}
+        </div>
+        <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto w-1/2 ">
           {filteredProducts?.map((product) => {
             return (
               <li key={product.productId}>
@@ -67,20 +70,23 @@ export function Home() {
                   <CardHeader>
                     <CardTitle>{product.name}</CardTitle>
                     <CardDescription>
-                    <img
-  src={product.image}
-  alt={product.name}
-  className="w-[200px] h-[100px] object-cover rounded-lg mx-auto"
-/>
-
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-[200px] h-[150px] object-cover rounded-lg mx-auto"
+                      />
                     </CardDescription>
-                    <CardDescription>Card Description</CardDescription>
+                    {/* <CardDescription>Card Description</CardDescription> */}
                   </CardHeader>
                   <CardContent>
                     <p>SAR {product.price}</p>
                   </CardContent>
                   <CardFooter className="flex justify-center space-x-4">
-                    <Button asChild variant="outline" className=" bg-[#141e20] text-white">
+                    <Button
+                      asChild
+                      variant="outline"
+                      className=" bg-[#141e20] text-white"
+                    >
                       <Link to={`/products/${product.productId}`}>Details</Link>
                     </Button>
                     <Button

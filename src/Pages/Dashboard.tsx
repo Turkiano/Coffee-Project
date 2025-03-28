@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/table";
 import { Alert } from "@/Compo/Alert";
 import { EditProduct } from "@/Compo/EditProduct";
+import { UsersInfo } from "@/Compo/UsersInfo";
+import { CategoriesInfo } from "@/Compo/CategoriesInfo";
 
 export function Dashboard() {
   const queryClient = useQueryClient();
@@ -25,6 +27,10 @@ export function Dashboard() {
     categoryId: "",
   });
 
+
+    
+  
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setProduct({
@@ -32,6 +38,31 @@ export function Dashboard() {
       [name]: value,
     });
   };
+
+    //to get products from API
+    const getProducts = async (): Promise<ProductTypes[]> => {
+      const res = await api.get("/products");
+      return res.data;
+    };
+
+   
+
+     //Queries using constructuring
+  const {
+    data: products,
+    error,
+    isLoading,
+  } = useQuery<ProductTypes[]>({
+    queryKey: ["products"],
+    queryFn: getProducts, //fetching data
+  });
+
+
+  // const products = data?.products || [];
+  // const users = data?.users || [];
+
+  if (isLoading) return <p>Loading product data...</p>;
+  if (error) return <p>Error loading product data</p>;
 
   const handleDeleteProduct = async (id: string) => {
     await deleteProduct(id);
@@ -60,28 +91,15 @@ export function Dashboard() {
     }
   };
 
-  //to get products from API
-  const getProducts = async (): Promise<ProductTypes[]> => {
-    const res = await api.get("/products");
-    return res.data;
-  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault(); // Prevent page refresh~
     await postProduct(); //send the dada to the backend
     queryClient.invalidateQueries({ queryKey: ["products"] });
   };
 
-  //Queries using constructuring
-  const {
-    data: products,
-    error,
-    isLoading,
-  } = useQuery<ProductTypes[]>({
-    queryKey: ["products"],
-    queryFn: getProducts, //fetching data
-  });
+ 
 
-  if (isLoading) return <p>Loading products...</p>;
 
   return (
     <>
@@ -117,10 +135,20 @@ export function Dashboard() {
               <TabsTrigger value="products" className="text-white gap-5">
                 Products
               </TabsTrigger>
+              <TabsTrigger value="categories" className="text-white gap-5">
+                Categories
+              </TabsTrigger>
             </TabsList>
             <TabsContent value="users">
               Make changes to your account here.
             </TabsContent>
+            <TabsContent value="users">
+              <UsersInfo/>
+            </TabsContent>
+            <TabsContent value="categories">
+              <CategoriesInfo/>
+            </TabsContent>
+
             <TabsContent value="products">
               <div className="scroll-m-20 text-4xl my-10 font-semibold tracking-tight">
                 <Table>

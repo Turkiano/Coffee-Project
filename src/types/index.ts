@@ -6,6 +6,7 @@ export type UserTypes = {
     phone: number
     email: string
     role: RoleTypes
+    createdAt: string
 }
 
 

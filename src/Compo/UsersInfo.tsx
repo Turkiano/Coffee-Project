@@ -9,6 +9,7 @@ export function UsersInfo(){
 
      const [user, setUser] = useState<UserTypes>({
       id: "",
+      createdAt: "",
       firstName: "",
       lastName: "",
       phone: 0,
@@ -44,6 +45,7 @@ export function UsersInfo(){
              <TableHeader>
                <TableRow>
                  <TableHead className="text-left">User ID</TableHead>
+                 <TableHead className="text-left">Created At</TableHead>
                  <TableHead className="text-left">First Name</TableHead>
                  <TableHead className="text-left">Last Name</TableHead>
                  <TableHead className="text-left">Phone</TableHead>
@@ -55,6 +57,7 @@ export function UsersInfo(){
                {users?.map((user) => (
                  <TableRow key={user.id}>
                    <TableCell className="text-left ">{user.id}</TableCell>
+                   <TableCell className="text-left ">{user.createdAt}</TableCell>
                    <TableCell className="text-left ">{user.firstName}</TableCell>
                    <TableCell className="text-left ">{user.lastName}</TableCell>
                    <TableCell className="text-left ">{user.phone}</TableCell>

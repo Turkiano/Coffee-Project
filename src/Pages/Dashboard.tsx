@@ -25,11 +25,12 @@ export function Dashboard() {
   const [product, setProduct] = useState({
     name: "",
     categoryId: "",
-  });
-
-
+    image: "",
+    quantity: 0,
+    price: 0,
+    description: ""
     
-  
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -39,15 +40,13 @@ export function Dashboard() {
     });
   };
 
-    //to get products from API
-    const getProducts = async (): Promise<ProductTypes[]> => {
-      const res = await api.get("/products");
-      return res.data;
-    };
+  //to get products from API
+  const getProducts = async (): Promise<ProductTypes[]> => {
+    const res = await api.get("/products");
+    return res.data;
+  };
 
-   
-
-     //Queries using constructuring
+  //Queries using constructuring
   const {
     data: products,
     error,
@@ -56,7 +55,6 @@ export function Dashboard() {
     queryKey: ["products"],
     queryFn: getProducts, //fetching data
   });
-
 
   // const products = data?.products || [];
   // const users = data?.users || [];
@@ -91,15 +89,11 @@ export function Dashboard() {
     }
   };
 
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault(); // Prevent page refresh~
-    await postProduct(); //send the dada to the backend
+    await postProduct(); //send the data to the backend
     queryClient.invalidateQueries({ queryKey: ["products"] });
   };
-
- 
-
 
   return (
     <>
@@ -143,10 +137,10 @@ export function Dashboard() {
               Make changes to your account here.
             </TabsContent>
             <TabsContent value="users">
-              <UsersInfo/>
+              <UsersInfo />
             </TabsContent>
             <TabsContent value="categories">
-              <CategoriesInfo/>
+              <CategoriesInfo />
             </TabsContent>
 
             <TabsContent value="products">

@@ -17,7 +17,6 @@ import { NavBar } from "@/Compo/NavBar";
 import { Link } from "react-router-dom";
 import HeroSection from "@/Compo/HeroSection";
 import { PromoSection } from "@/Compo/PromoSection";
-import { AlignCenter } from "lucide-react";
 
 export function Home() {
   const [searchBy, setSearchBy] = useState("");

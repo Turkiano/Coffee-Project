@@ -18,6 +18,7 @@ export type ProductTypes = {
     image: string
     quantity: number
     createdAt: string
+    description: string
 }
 
 export type CategoryTypes = {
@@ -45,9 +46,10 @@ type OrderStatus = "Pending" | "Processing" | "Completed" | "Cancelled";
 
 
 export type OrderItemTypes = {
-    orderItemsId: string 
-    orderId: string
+    orderItemsId?: string 
+    orderId?: string
     productId: string 
     quantity: number 
-    price: number
+    price?: number
 }
+

@@ -8,7 +8,7 @@ let baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5125/api/v1';
 
 if (!isDevelopment) {
   // Update this when you have a working backend
-  baseURL = 'https://coffee-project-ashen.vercel.app/';
+  baseURL = "https://coffeeshop-api-34cu.onrender.com/api/v1";
 }
 
 const api = axios.create({

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function HeroSection() {
     return (
       <section
-        className="w-full py-24 md:py-48 lg:py-64 bg-cover bg-center relative"
+        className="w-full flex justify-center py-24 md:py-48 lg:py-64 bg-cover bg-center relative"
         style={{
           backgroundImage:
             "url('https://i.postimg.cc/TYGChPwG/Flux-Dev-A-warm-and-inviting-image-of-three-happy-Saudi-female-2.jpg')",

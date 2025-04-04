@@ -1,12 +1,16 @@
 import { Button } from "@/components/ui/button";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { jwtDecode } from "jwt-decode";
 import { Cart } from "./Cart";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
-import { ChangeEvent, } from "react";
+import { ChangeEvent } from "react";
 import { ModeToggle } from "./mode-toggle";
-
 
 interface NavBarProps {
   searchBy: string;
@@ -14,10 +18,6 @@ interface NavBarProps {
 }
 
 export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
-    
-   
-  
-  
   const token = localStorage.getItem("token");
   let userRole = null;
 
@@ -33,7 +33,6 @@ export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
       console.error("Invalid Token:", error);
     }
   }
-  
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -44,34 +43,33 @@ export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
     setSearchBy(e.target.value);
   };
 
-
   return (
-    <div className="w-full flex justify-between items-center border-b p-3 bg-background z-50">
+    <div className="w-full fixed top-0 grid grid-cols-5  items-center border-b p-3 bg-background z-50">
       {/* Logo Section */}
-      <div>
+      <div className="justify-self-start">
         <Link to="/" className="text-xl font-bold ">
           Logo
         </Link>
       </div>
-      
 
       {/* Navigation Menu (Desktop) */}
-      <div className="hidden md:flex space-x-6 mx-auto">
+      <div className="hidden md:flex space-x-6 mx-auto col-span-3">
         <Link to="/">Home</Link>
         <Link to="/aboutUs">About Us</Link>
         {userRole === "Admin" && <Link to="/dashboard">Dashboard</Link>}
       </div>
-       {/* Search Input */}
-       <div className="w-1/7 mr-5">
-        <Input
-          type="search"
-          placeholder="Search for products"
-          value={searchBy} // Controlled input
-          onChange={handleChange}
-        />
-      </div>
+      {/* Search Input */}
       {/* Authentication Section */}
-      <div className="hidden md:flex space-x-3">
+      <div className="hidden md:flex space-x-3 justify-self-end">
+        <div className="w-48 mr-5">
+          <Input
+            type="search"
+            placeholder="Search for products"
+            value={searchBy} // Controlled input
+            onChange={handleChange}
+            className="bg-background"
+          />
+        </div>
         {token ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -98,7 +96,7 @@ export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
             </DropdownMenuContent>
           </DropdownMenu>
         )}
-        <ModeToggle/>
+        <ModeToggle />
         <Cart />
       </div>
     </div>

@@ -23,7 +23,7 @@ export function Home() {
   console.log("The state: ", searchBy);
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
-  const { state, handleAddToCart } = context;
+  const { handleAddToCart } = context;
 
   const getProducts = async (): Promise<ProductTypes[]> => {
     const res = await api.get("/products");
@@ -37,7 +37,7 @@ export function Home() {
     queryFn: getProducts, //fetching data
   });
 
-  if (isLoading) return <p>Loading products...</p>;
+  // if (isLoading) return <p>Loading products...</p>;
 
   // **Filter Products Based on Search Input**
   const filteredProducts = data?.filter((product) =>
@@ -61,45 +61,53 @@ export function Home() {
             <p> No products found, search for other names</p>
           )}
         </div>
-        <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto w-1/2 ">
-          {filteredProducts?.map((product) => {
-            return (
-              <li key={product.productId}>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{product.name}</CardTitle>
-                    <CardDescription>
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-[200px] h-[150px] object-cover rounded-lg mx-auto"
-                      />
-                    </CardDescription>
-                    {/* <CardDescription>Card Description</CardDescription> */}
-                  </CardHeader>
-                  <CardContent>
-                    <p>SAR {product.price}</p>
-                  </CardContent>
-                  <CardFooter className="flex justify-center space-x-4">
-                    <Button
-                      asChild
-                      variant="outline"
-                      className=" bg-[#141e20] text-white"
-                    >
-                      <Link to={`/products/${product.productId}`}>Details</Link>
-                    </Button>
-                    <Button
-                      className="text-white"
-                      onClick={() => handleAddToCart(product)}
-                    >
-                      Add to 🛒
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </li>
-            );
-          })}
-        </ul>
+        {!isLoading ? (
+          <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto w-1/2 ">
+            {filteredProducts?.map((product) => {
+              return (
+                <li key={product.productId}>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{product.name}</CardTitle>
+                      <CardDescription>
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-[200px] h-[150px] object-cover rounded-lg mx-auto"
+                        />
+                      </CardDescription>
+                      {/* <CardDescription>Card Description</CardDescription> */}
+                    </CardHeader>
+                    <CardContent>
+                      <p>SAR {product.price}</p>
+                    </CardContent>
+                    <CardFooter className="flex justify-center space-x-4">
+                      <Button
+                        asChild
+                        variant="outline"
+                        className=" bg-[#141e20] text-white"
+                      >
+                        <Link to={`/products/${product.productId}`}>
+                          Details
+                        </Link>
+                      </Button>
+                      <Button
+                        className="text-white"
+                        onClick={() => handleAddToCart(product)}
+                      >
+                        Add to 🛒
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <div className="pb-12 felx justify-center w-full">
+            <span className=" text-xl">Loading products...</span>
+          </div>
+        )}
         {error && <p className="text-red-500">Error: {error.message}</p>}
       </div>
     </>

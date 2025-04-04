@@ -1,30 +1,31 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { ChangeEvent, FormEvent, useState } from 'react';
-import api from '@/api';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-
+import { Link, useNavigate } from "react-router-dom";
+import { ChangeEvent, FormEvent, useState } from "react";
+import api from "@/api";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { OtpDailog } from "@/Compo/OtpDailog";
 
 export function Login() {
-
-  const navigator = useNavigate()
+  const navigator = useNavigate();
 
   const [user, setUser] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
+
+  const [openOTP, setOpenOTP] = useState(false);
 
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async () => {
     try {
-      const res = await api.post('/users/login', user);
+      const res = await api.post("/users/login", user);
       return res.data;
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       setError("It's either wrong email or password, Please try again.");
-      return Promise.reject(new Error('Something went wrong!!'));
+      return Promise.reject(new Error("Something went wrong!!"));
     }
   };
 
@@ -39,56 +40,59 @@ export function Login() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null); // Reset error state
-    await handleLogin(); 
+    await handleLogin();
 
-    const token = await handleLogin()
+    const token = await handleLogin();
     if (token) {
-      localStorage.setItem("token", token)
-      navigator('/')
+      localStorage.setItem("token", token);
+      // navigator("/");
+      setOpenOTP(true)
     }
   };
 
-  
-
   return (
-    
+  
     <div className="m-0">
-  <div className=" ">
-
-    <h1>Login Page</h1>
-  </div>
-    <div className="w-1/3 m-auto mt-10">
-      <form action="POST" onSubmit={handleSubmit}>
-        <div>
-          <div className="mb-4">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Email"
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Password"
-              onChange={handleChange}
-              required
+      <OtpDailog openOTP={openOTP} setopenOTP={setOpenOTP}  />
+      <div className=" ">
+        <h1>Login Page</h1>
+      </div>
+      <div className="w-1/3 m-auto mt-10">
+        <form action="POST" onSubmit={handleSubmit}>
+          <div>
+            <div className="mb-4">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Email"
+                onChange={handleChange}
+                required
               />
+            </div>
+            <div className="mb-4">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
-        </div>
-        <Button type="submit">Login</Button>
-        <p>
-          Create an Account <Link to="/signUp" className='text-blue-600'> here</Link>
-        </p>
-      </form>
+          <Button type="submit">Login</Button>
+          <p>
+            Create an Account{" "}
+            <Link to="/signUp" className="text-blue-600">
+              {" "}
+              here
+            </Link>
+          </p>
+        </form>
+      </div>
     </div>
-  </div>
   );
 }

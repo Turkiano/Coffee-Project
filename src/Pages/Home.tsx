@@ -62,7 +62,7 @@ export function Home() {
           )}
         </div>
         {!isLoading ? (
-          <ul className="mt-10 grid grid-cols-3 gap-4 mx-auto w-1/2 ">
+          <ul className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 mx-auto md:w-1/2 ">
             {filteredProducts?.map((product) => {
               return (
                 <li key={product.productId}>
@@ -81,7 +81,7 @@ export function Home() {
                     <CardContent>
                       <p>SAR {product.price}</p>
                     </CardContent>
-                    <CardFooter className="flex justify-center space-x-4">
+                    <CardFooter className="flex flex-col md:flex-row gap-3 justify-center space-x-4">
                       <Button
                         asChild
                         variant="outline"

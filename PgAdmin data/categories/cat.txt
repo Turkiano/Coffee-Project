@@ -1,0 +1,2 @@
+CategoryId,Name,Description,CreatedAt
+3fa85f64-5717-4562-b3fc-2c963f66afa6,Cars,\N,2025-03-28 14:05:03.587116+03

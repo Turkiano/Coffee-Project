@@ -10,6 +10,7 @@ import { AboutUs } from "./Pages/AboutUs";
 import { Dashboard } from "./Pages/Dashboard";
 import { ProductDetails } from "./Pages/ProductDetails";
 import { ThemeProvider } from "./Compo/theme-provider";
+import CoffeeShopReservation from "./Pages/CoffeeShopReservation";
 
 export type GlobalContextTypes = {
   state: GlobalStateTypes;
@@ -87,6 +88,12 @@ function App() {
       path: "/products/:productId",
       element: <ProductDetails />,
     },
+    {
+      path: "/reservation",
+      element: <CoffeeShopReservation />,
+    },
+
+    //CoffeeShopReservation
   ]);
 
   return (

@@ -35,13 +35,15 @@ export default function CoffeeShopReservation() {
       name: "Riverside Retreat",
       description:
         "Peaceful outdoor seating with beautiful views of the river and nature.",
-      image: "https://i.postimg.cc/wM8vwbQx/a-3d-top-view-blueprint-of-a-modern-coff-TX-p1ya7-Qayj-Sc-J3dk-JIlg-ogpa5-Rv4-Sk2-Dq-OLW6a2ul-Q.jpg", // replace this later
+      image:
+        "https://i.postimg.cc/wM8vwbQx/a-3d-top-view-blueprint-of-a-modern-coff-TX-p1ya7-Qayj-Sc-J3dk-JIlg-ogpa5-Rv4-Sk2-Dq-OLW6a2ul-Q.jpg", // replace this later
     },
     historic: {
       name: "Historic District",
       description:
         "Charming café housed in a renovated 19th century building with classic decor.",
-      image: "https://i.postimg.cc/LsKb6tDY/a-3d-top-view-blueprint-of-a-modern-coff-t-n-Wk-DBy-Qnqzdvq-SGn-Hz-DA-ogpa5-Rv4-Sk2-Dq-OLW6a2ul-Q.jpg", // replace this later
+      image:
+        "https://i.postimg.cc/LsKb6tDY/a-3d-top-view-blueprint-of-a-modern-coff-t-n-Wk-DBy-Qnqzdvq-SGn-Hz-DA-ogpa5-Rv4-Sk2-Dq-OLW6a2ul-Q.jpg", // replace this later
     },
   };
 
@@ -50,7 +52,7 @@ export default function CoffeeShopReservation() {
   return (
     <div className="container mx-auto py-8 px-4">
       <h1 className="text-3xl font-bold text-center mb-8">
-        Reserve Your Table
+        Your Table Reservation
       </h1>
 
       <div className="grid md:grid-cols-2 gap-8">

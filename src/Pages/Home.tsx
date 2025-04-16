@@ -11,7 +11,7 @@ import {
 
 import { ProductTypes } from "../types";
 import { Button } from "@/components/ui/button";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "@/App";
 import { NavBar } from "@/Compo/NavBar";
 import { Link } from "react-router-dom";
@@ -19,11 +19,10 @@ import HeroSection from "@/Compo/HeroSection";
 import { PromoSection } from "@/Compo/PromoSection";
 
 export function Home() {
-  const [searchBy, setSearchBy] = useState("");
-  console.log("The state: ", searchBy);
+  
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
-  const { handleAddToCart } = context;
+  const { handleAddToCart, searchBy } = context;
 
   const getProducts = async (): Promise<ProductTypes[]> => {
     const res = await api.get("/products");
@@ -47,8 +46,7 @@ export function Home() {
   return (
     <>
       <div className="w-full mt-0 ">
-        <NavBar searchBy={searchBy} setSearchBy={setSearchBy} />{" "}
-        {/* Pass state as prop */}
+        <NavBar/>
       </div>
       <HeroSection />
 

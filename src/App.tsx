@@ -17,6 +17,8 @@ export type GlobalContextTypes = {
   handleAddToCart: (products: ProductTypes) => void;
   handleDeleteFromCart: (id: string) => void
   handleRemoveFromCart: () => void
+  searchBy: string;
+  setSearchBy: (value: string) => void;
 };
 
 export type GlobalStateTypes = {
@@ -29,6 +31,9 @@ function App() {
   const [state, setState] = useState<GlobalStateTypes>({
     cart: [],
   });
+
+  const [searchBy, setSearchBy] = useState("");
+
 
 
 
@@ -99,7 +104,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <GlobalContext.Provider
-        value={{ state, handleAddToCart, handleDeleteFromCart, handleRemoveFromCart }}
+        value={{ state, handleAddToCart, handleDeleteFromCart, handleRemoveFromCart, searchBy, setSearchBy }}
       >
         <div className="App">
           <RouterProvider router={router} />

@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { NavBar } from "@/Compo/NavBar";
 
 export default function CoffeeShopReservation() {
   const [location, setLocation] = useState("downtown");
@@ -50,7 +51,12 @@ export default function CoffeeShopReservation() {
   const currentLocation = locations[location as keyof typeof locations];
 
   return (
-    <div className="container mx-auto py-8 px-4">
+    <>
+    <div className="mb-10">
+
+    <NavBar/>
+    </div>
+    <div className="container mx-auto py-8 px-4 ">
       <h1 className="text-3xl font-bold text-center mb-8">
         Your Table Reservation
       </h1>
@@ -87,7 +93,7 @@ export default function CoffeeShopReservation() {
                   src={loc.image || "/placeholder.svg"}
                   alt={loc.name}
                   className="w-full h-full object-cover"
-                />
+                  />
 
                 <div className="absolute inset-0 bg-black/30 flex items-end p-2">
                   <span className="text-white text-xs font-medium">
@@ -128,7 +134,7 @@ export default function CoffeeShopReservation() {
                     value={seatingType}
                     onValueChange={setSeatingType}
                     className="flex space-x-4"
-                  >
+                    >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="indoor" id="indoor" />
                       <Label htmlFor="indoor">Indoor</Label>
@@ -220,7 +226,7 @@ export default function CoffeeShopReservation() {
                   <Textarea
                     id="special-requests"
                     placeholder="Any special requests or dietary requirements?"
-                  />
+                    />
                 </div>
 
                 <Button type="submit" className="w-full">
@@ -232,5 +238,6 @@ export default function CoffeeShopReservation() {
         </div>
       </div>
     </div>
+                    </>
   );
 }

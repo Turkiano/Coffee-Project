@@ -11,16 +11,24 @@ import { jwtDecode } from "jwt-decode";
 import { Cart } from "./Cart";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useContext } from "react";
 import { ModeToggle } from "./mode-toggle";
 import { Menu } from "lucide-react";
+import { GlobalContext } from "@/App";
+import { useQuery } from "@tanstack/react-query";
+import { ProductTypes } from "@/types";
+import api from "@/api";
 
-interface NavBarProps {
-  searchBy: string;
-  setSearchBy: (value: string) => void;
-}
+// interface NavBarProps {
+//   searchBy: string;
+//   setSearchBy: (value: string) => void;
+// }
 
-export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
+export function NavBar() {
+  const context = useContext(GlobalContext);
+  if (!context) throw new Error("Context is missing in NavBar!");
+
+  const { searchBy, setSearchBy } = context;
   const token = localStorage.getItem("token");
   let userRole = null;
 
@@ -46,6 +54,20 @@ export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
     setSearchBy(e.target.value);
   };
 
+  //Fetch all products from the API
+  const { data: products } = useQuery<ProductTypes[]>({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await api.get("/products");
+      return res.data;
+    },
+  });
+
+  // Filter based on search input
+  const filtered = products?.filter((product) =>
+    product.name.toLowerCase().includes(searchBy.toLowerCase()),
+  );
+
   return (
     <>
       {/* desktop */}
@@ -61,20 +83,46 @@ export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
         <div className="flex space-x-6 mx-auto col-span-3">
           <Link to="/">Home</Link>
           <Link to="/aboutUs">About Us</Link>
+          <Link to="/reservation">Reservation</Link>
           {userRole === "Admin" && <Link to="/dashboard">Dashboard</Link>}
         </div>
         {/* Search Input */}
-        {/* Authentication Section */}
         <div className="flex space-x-3 justify-self-end">
-          <div className="w-48 mr-5">
+          {/* Search Input */}
+          <div className="relative w-48 mr-5">
             <Input
               type="search"
               placeholder="Search for products"
-              value={searchBy} // Controlled input
+              value={searchBy}
               onChange={handleChange}
               className="bg-background"
             />
+
+            {/* Filtered Results Dropdown */}
+            {searchBy && filtered && filtered.length > 0 && (
+              <ul className="absolute z-50 w-full mt-1 bg-white rounded-md shadow-lg text-black max-h-60 overflow-y-auto">
+                {filtered.map((product) => (
+                  <li key={product.productId}>
+                    <Link
+                      to={`/products/${product.productId}`}
+                      onClick={() => setSearchBy("")}
+                      className="block px-4 py-2 hover:bg-gray-200"
+                    >
+                      {product.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* No Results Message */}
+            {searchBy && filtered?.length === 0 && (
+              <div className="absolute z-50 w-full mt-1 bg-white text-black rounded-md shadow-md px-4 py-2">
+                No products found.
+              </div>
+            )}
           </div>
+
           {token ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -117,14 +165,36 @@ export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
           </Link>
         </div>
 
-        <div className="w-40 mr-5 col-span-2">
+        <div className="relative w-40 mr-5 col-span-2">
           <Input
             type="search"
             placeholder="🔍 Search"
-            value={searchBy} // Controlled input
+            value={searchBy}
             onChange={handleChange}
             className="bg-[#141e20]"
           />
+
+          {searchBy && filtered && filtered.length > 0 && (
+            <ul className="absolute z-50 w-full mt-1 bg-white rounded-md shadow-lg text-black max-h-60 overflow-y-auto">
+              {filtered.map((product) => (
+                <li key={product.productId}>
+                  <Link
+                    to={`/products/${product.productId}`}
+                    onClick={() => setSearchBy("")}
+                    className="block px-4 py-2 hover:bg-gray-200"
+                  >
+                    {product.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {searchBy && filtered?.length === 0 && (
+            <div className="absolute z-50 w-full mt-1 bg-white text-black rounded-md shadow-md px-4 py-2">
+              No products found.
+            </div>
+          )}
         </div>
 
         <div className="flex gap-3 col-span-2 items-center justify-self-end">
@@ -138,7 +208,10 @@ export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
               <DropdownMenuSeparator />
 
               {token ? (
-                <DropdownMenuItem onClick={handleLogout} className="bg-[#141e20]">
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  className="bg-[#141e20]"
+                >
                   Logout
                 </DropdownMenuItem>
               ) : (
@@ -151,15 +224,19 @@ export function NavBar({ searchBy, setSearchBy }: NavBarProps) {
                   </DropdownMenuItem>
                 </>
               )}
-               <DropdownMenuSeparator />
-              <DropdownMenuLabel >Pages</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuLabel>Pages</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild className="bg-[#141e20]">
-                <Link to="/" >Home</Link>
+                <Link to="/">Home</Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild className="bg-[#141e20]">
                 <Link to="/aboutUs">About Us</Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem asChild className="bg-[#141e20]">
+                <Link to="/reservation">Reservation</Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild className="bg-[#141e20]">

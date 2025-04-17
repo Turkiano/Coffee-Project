@@ -11,7 +11,7 @@ import { jwtDecode } from "jwt-decode";
 import { Cart } from "./Cart";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
-import { ChangeEvent, useContext } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { ModeToggle } from "./mode-toggle";
 import { Menu } from "lucide-react";
 import { GlobalContext } from "@/App";
@@ -29,6 +29,18 @@ export function NavBar() {
   if (!context) throw new Error("Context is missing in NavBar!");
 
   const { searchBy, setSearchBy } = context;
+  const [debouncedSearch, setDebouncedSearch] = useState(searchBy);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchBy);
+    }, 300); // Delay in ms
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchBy]);
+
   const token = localStorage.getItem("token");
   let userRole = null;
 
@@ -65,7 +77,7 @@ export function NavBar() {
 
   // Filter based on search input
   const filtered = products?.filter((product) =>
-    product.name.toLowerCase().includes(searchBy.toLowerCase()),
+    product.name.toLowerCase().includes(debouncedSearch.toLowerCase()),
   );
 
   return (
@@ -101,14 +113,19 @@ export function NavBar() {
             {/* Filtered Results Dropdown */}
             {searchBy && filtered && filtered.length > 0 && (
               <ul className="absolute z-50 w-full mt-1 bg-white rounded-md shadow-lg text-black max-h-60 overflow-y-auto">
-                {filtered.map((product) => (
+                {filtered.slice(0, 5).map((product) => (
                   <li key={product.productId}>
                     <Link
                       to={`/products/${product.productId}`}
                       onClick={() => setSearchBy("")}
-                      className="block px-4 py-2 hover:bg-gray-200"
+                      className="flex items-center gap-3 px-4 py-2 hover:bg-gray-200"
                     >
-                      {product.name}
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-8 h-8 object-cover rounded"
+                      />
+                      <span>{product.name}</span>
                     </Link>
                   </li>
                 ))}
@@ -174,16 +191,21 @@ export function NavBar() {
             className="bg-[#141e20]"
           />
 
-          {searchBy && filtered && filtered.length > 0 && (
-            <ul className="absolute z-50 w-full mt-1 bg-white rounded-md shadow-lg text-black max-h-60 overflow-y-auto">
-              {filtered.map((product) => (
+          {searchBy.length > 0 && filtered && (
+            <ul className="absolute mt-2 bg-white text-black rounded shadow-md w-60 max-h-60 overflow-y-auto z-50 left-3 top-14">
+              {filtered.slice(0, 5).map((product) => (
                 <li key={product.productId}>
                   <Link
                     to={`/products/${product.productId}`}
                     onClick={() => setSearchBy("")}
-                    className="block px-4 py-2 hover:bg-gray-200"
+                    className="flex items-center gap-3 px-4 py-2 hover:bg-gray-200"
                   >
-                    {product.name}
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-8 h-8 object-cover rounded"
+                    />
+                    <span>{product.name}</span>
                   </Link>
                 </li>
               ))}

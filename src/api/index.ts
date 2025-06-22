@@ -1,14 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
+const isDevelopment = import.meta.env.MODE === "development";
 
-const isDevelopment = import.meta.env.MODE === 'development';
-
-  // Update this when you have a working backend
-let baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5125/api/v1';
+// Update this when you have a working backend
+let baseURL = import.meta.env.VITE_API_URL || "http://localhost:5125/api/v1";
 
 if (!isDevelopment) {
   // Update this when you have a working backend
-  baseURL = "https://coffeeshop-api-34cu.onrender.com/api/v1";
+  baseURL = "https://coffeeshop2026.onrender.com/api/v1";
 }
 
 const api = axios.create({

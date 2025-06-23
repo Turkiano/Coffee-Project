@@ -27,7 +27,7 @@ export default function HeroSection() {
           </div>
           <div className="space-x-4">
             <Button asChild size="lg" className="bg-white text-black">
-              <Link to="/reservation">Book Now</Link>
+              <Link to="/reservation">Save Your Seat</Link>
             </Button>
           </div>
         </div>

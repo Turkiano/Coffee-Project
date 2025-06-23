@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function PromoSection() {
   return (
     <section className="bg-[#0b161a] text-white py-16 px-6">
@@ -23,25 +25,25 @@ export function PromoSection() {
           <p className="italic text-sm">Taste perception</p>
           <h3 className="text-2xl font-bold mt-2">TRADITIONAL & MODERN</h3>
           <p className="text-gray-400 mt-4">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque.
+            Reserve your table now at Our Coffee Shop and treat yourself to the
+            perfect blend of flavor, vibes, and unforgettable moments! ☕✨
           </p>
           <button className="mt-6 bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition w-1/2 mx-auto">
-            READ MORE
+            <Link to="/reservation">Grab a Table</Link>
           </button>
         </div>
 
-         {/* thrid Grid Item - Image */}
-         <div className="relative">
-            <div
-              style={{
-                backgroundImage: "url('https://i.postimg.cc/50hjP51Z/1.jpg')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-              className="rounded-lg w-full h-150"
-            />
-          </div>
+        {/* thrid Grid Item - Image */}
+        <div className="relative">
+          <div
+            style={{
+              backgroundImage: "url('https://i.postimg.cc/50hjP51Z/1.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            className="rounded-lg w-full h-150"
+          />
+        </div>
       </div>
     </section>
   );

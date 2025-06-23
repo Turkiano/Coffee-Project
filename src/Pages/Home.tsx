@@ -19,7 +19,6 @@ import HeroSection from "@/Compo/HeroSection";
 import { PromoSection } from "@/Compo/PromoSection";
 
 export function Home() {
-  
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
   const { handleAddToCart, searchBy } = context;
@@ -46,11 +45,10 @@ export function Home() {
   return (
     <>
       <div className="w-full mt-0 ">
-        <NavBar/>
+        <NavBar />
       </div>
       <HeroSection />
 
-      <PromoSection />
 
       <div className="px-5  mt-19  bg-[#141e20] w-full">
         <h1 className="text-2xl uppercase align">Products</h1>
@@ -104,10 +102,13 @@ export function Home() {
         ) : (
           <div className="pb-12 felx justify-center w-full">
             <span className=" text-xl">Loading products...</span>
+            <span className=" text-xl">Less than 60 seconds</span>
           </div>
         )}
         {error && <p className="text-red-500">Error: {error.message}</p>}
       </div>
+            <PromoSection />
+
     </>
   );
 }

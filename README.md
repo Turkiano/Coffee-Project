@@ -44,7 +44,7 @@ Docker & Docker Compose
 
 ----------------------------------------------
 1. Clone the repository
-git clone https://github.com/your-username/coffee-shop.git
+git clone https://github.com/turkiano/coffee-shop.git
 cd coffee-shop
 
 2. Setup Frontend

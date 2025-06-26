@@ -8,6 +8,7 @@ A modern full-stack web application that allows customers to browse, customize, 
 
 
 🚀 Technologies Used
+---------------------------------
 Frontend:
 
 ⚛️ React.js
@@ -34,9 +35,9 @@ Deployment:
 🔗 Vercel (Frontend)
 
 🖥️ Render (Backend)
--------------------------------------------------------------------
 
 ⚙️ Installation Instructions
+--------------------------------------
 Clone the project and run it locally
 
 Prerequisites
@@ -46,7 +47,6 @@ Node.js
 
 Docker & Docker Compose
 
-----------------------------------------------
 1. Clone the repository
 git clone https://github.com/turkiano/coffee-shop.git
 cd coffee-shop

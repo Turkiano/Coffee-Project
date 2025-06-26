@@ -41,8 +41,8 @@ Node.js
 .NET 7+
 
 Docker & Docker Compose
-----------------------------------------------------
 
+----------------------------------------------
 1. Clone the repository
 git clone https://github.com/your-username/coffee-shop.git
 cd coffee-shop
@@ -59,8 +59,9 @@ dotnet run
 
 Or run using Docker:
 docker-compose up --build
------------------------------------------------------------
+
 🧠 Features & Functionality
+-----------------------------------------------------------
 👤 User Registration & Login (JWT)
 
 🛒 Dynamic Shopping Cart
@@ -76,15 +77,17 @@ docker-compose up --build
 🌐 RESTful API Integration
 
 🐳 Dockerized Backend for easy deployment
-----------------------------------------------------------
+
 💻 Usage Examples
+----------------------------------------------------------
 Customers can select coffee types, customize options, and place orders.
 
 Admins can log in to add, edit, or remove products and track orders in real-time.
 
 Responsive design ensures smooth UX across all devices.
-----------------------------------------------------------------
+
 🤝 Contributing
+----------------------------------------------------------------
 Contributions are welcome! Here’s how you can help:
 
 Fork the project.
@@ -96,7 +99,7 @@ Commit your changes: git commit -m 'Add some feature'
 Push to the branch: git push origin feature/my-feature
 
 Open a Pull Request
---------------------------------------------------------------------
+
 📄 License
 This project is licensed under the MIT License.
 

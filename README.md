@@ -1,7 +1,11 @@
 ☕ Coffee Shop – Online Ordering System
-Live Demo: coffeeproject-eta.vercel.app
+------------------------------------------------
+Live Demo: [coffeeproject-eta.vercel.app](https://coffeeproject-eta.vercel.app/)
 
 A modern full-stack web application that allows customers to browse, customize, and order coffee seamlessly online. The system features a smooth customer interface, real-time cart updates, and a powerful admin dashboard for managing menu items and orders. Built with scalability, user experience, and performance in mind.
+
+![image](https://github.com/user-attachments/assets/91ccb4b1-0507-48f2-a717-acc8c3027777)
+
 
 🚀 Technologies Used
 Frontend:

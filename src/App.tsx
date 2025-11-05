@@ -11,8 +11,7 @@ import { Dashboard } from "./Pages/Dashboard";
 import { ProductDetails } from "./Pages/ProductDetails";
 import { ThemeProvider } from "./Compo/theme-provider";
 import CoffeeShopReservation from "./Pages/CoffeeShopReservation";
-import { Orders } from "./Pages/Orders";
-
+import Orders from "./Pages/Orders";
 export type GlobalContextTypes = {
   state: GlobalStateTypes;
   handleAddToCart: (products: ProductTypes) => void;

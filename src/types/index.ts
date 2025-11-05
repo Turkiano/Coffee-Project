@@ -27,6 +27,7 @@ export type CategoryTypes = {
     createdAt: string
 }
 
+
 // Define a type for Role based on the values of the Role object
 export type RoleTypes = keyof typeof Role;
 
@@ -38,6 +39,8 @@ export const  Role = {
 
 export type OrderTypes = {
     userId: string
+    orderId: string
+    orderDate: string
     status: OrderStatus 
     items: OrderItemTypes []
 }

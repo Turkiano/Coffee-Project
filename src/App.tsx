@@ -11,12 +11,13 @@ import { Dashboard } from "./Pages/Dashboard";
 import { ProductDetails } from "./Pages/ProductDetails";
 import { ThemeProvider } from "./Compo/theme-provider";
 import CoffeeShopReservation from "./Pages/CoffeeShopReservation";
+import { Orders } from "./components/Orders";
 
 export type GlobalContextTypes = {
   state: GlobalStateTypes;
   handleAddToCart: (products: ProductTypes) => void;
-  handleDeleteFromCart: (id: string) => void
-  handleRemoveFromCart: () => void
+  handleDeleteFromCart: (id: string) => void;
+  handleRemoveFromCart: () => void;
   searchBy: string;
   setSearchBy: (value: string) => void;
 };
@@ -34,13 +35,7 @@ function App() {
 
   const [searchBy, setSearchBy] = useState("");
 
-
-
-
-
   const handleAddToCart = (product: ProductTypes) => {
-   
-
     setState({
       ...state,
       cart: [...state.cart, product],
@@ -48,24 +43,21 @@ function App() {
   };
 
   const handleDeleteFromCart = (id: string) => {
-    const cart = state.cart
-    const index = state.cart.findIndex(item => item.productId === id)
-    cart.splice(index,1)
+    const cart = state.cart;
+    const index = state.cart.findIndex((item) => item.productId === id);
+    cart.splice(index, 1);
 
     setState({
       ...state,
-      cart: cart
-    })
-
+      cart: cart,
+    });
   };
 
   const handleRemoveFromCart = () => {
-   
     setState({
       ...state,
-      cart: []
-    })
-
+      cart: [],
+    });
   };
 
   const router = createBrowserRouter([
@@ -94,6 +86,10 @@ function App() {
       element: <ProductDetails />,
     },
     {
+      path: "/Orders",
+      element: <Orders />,
+    },
+    {
       path: "/reservation",
       element: <CoffeeShopReservation />,
     },
@@ -104,7 +100,14 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <GlobalContext.Provider
-        value={{ state, handleAddToCart, handleDeleteFromCart, handleRemoveFromCart, searchBy, setSearchBy }}
+        value={{
+          state,
+          handleAddToCart,
+          handleDeleteFromCart,
+          handleRemoveFromCart,
+          searchBy,
+          setSearchBy,
+        }}
       >
         <div className="App">
           <RouterProvider router={router} />

@@ -41,10 +41,12 @@ export default function Orders() {
                 <p>
                   <strong>Status:</strong> {order.status}
                 </p>
-                <p>
-                  <strong>Date:</strong>{" "}
-                  {new Date(order.orderDate).toLocaleString()}
-                </p>
+               <p>
+  <strong>Date:</strong>{" "}
+  {order.orderDate
+    ? new Date(order.orderDate).toLocaleString()
+    : "No date available"}
+</p>
               </CardContent>
             </Card>
           ))

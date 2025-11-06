@@ -36,23 +36,21 @@ export const  Role = {
     Customer: "Customer"
 } as const
 
-
-export type OrderTypes = {
-    userId: string
-    orderId: string
-    orderDate: string
-    status: OrderStatus 
-    items: OrderItemTypes []
-}
-
-type OrderStatus = "Pending" | "Processing" | "Completed" | "Cancelled";
-
+export type OrderStatus = "Pending" | "Processing" | "Completed" | "Cancelled";
 
 export type OrderItemTypes = {
-    orderItemsId?: string 
-    orderId?: string
-    productId: string 
-    quantity: number 
-    price?: number
-}
+  orderItemsId?: string;
+  orderId?: string;
+  productId: string;
+  quantity: number;
+  price?: number;
+};
+
+export type OrderTypes = {
+  userId: string;
+  orderId?: string;
+  orderDate?: string;
+  status: OrderStatus;
+  items: OrderItemTypes[];
+};
 

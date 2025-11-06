@@ -6,20 +6,24 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
-import { OrderTypes, ProductTypes } from "@/types";
+import { OrderItemTypes, OrderTypes, ProductTypes } from "@/types";
 import { ShoppingCart } from "lucide-react";
 import { useContext } from "react";
 
 export function Cart() {
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
-  const { state, handleDeleteFromCart, handleAddToCart, handleRemoveFromCart } = context;
+  const { state, handleDeleteFromCart, handleAddToCart, handleRemoveFromCart } =
+    context;
 
-  const groups = state.cart.reduce((acc, obj) => {
-    const key = obj.productId;
-    const curGroup = acc[key] ?? [];
-    return { ...acc, [key]: [...curGroup, obj] };
-  }, {} as {[productId: string]: ProductTypes[]});
+  const groups = state.cart.reduce(
+    (acc, obj) => {
+      const key = obj.productId;
+      const curGroup = acc[key] ?? [];
+      return { ...acc, [key]: [...curGroup, obj] };
+    },
+    {} as { [productId: string]: ProductTypes[] },
+  );
 
   //to get the total cart
   let total = 0;
@@ -32,6 +36,7 @@ export function Cart() {
     status: "Processing",
     items: [],
   };
+  checkoutOrder.items = [] as OrderItemTypes[];
 
   Object.keys(groups).forEach((key) => {
     const products = groups[key];
@@ -39,36 +44,30 @@ export function Cart() {
     checkoutOrder.items.push({
       quantity: products.length,
       productId: key,
-    }); 
-  }
-);
+    });
+  });
 
   console.log("checkoutOrder: ", checkoutOrder);
 
-
-
   const handleCheckout = async () => {
     try {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token");
       const res = await api.post("/orders/checkout", checkoutOrder, {
         headers: {
-          authorization: `bearer ${token}`
-        }
-      })
+          authorization: `bearer ${token}`,
+        },
+      });
 
       if (res.status === 201) {
-        handleRemoveFromCart()
+        handleRemoveFromCart();
       }
-      
-      return res.data
+
+      return res.data;
     } catch (error) {
       console.error(error);
       return Promise.reject(new Error("Something went wrong"));
     }
-
-  }
-
-
+  };
 
   return (
     <Popover>
@@ -120,7 +119,9 @@ export function Cart() {
             );
           })}
           <p className="leading-none font-semibold mt-3"> Total: SAR {total}</p>
-          <Button className = "mt-5"onClick={handleCheckout}>Checkout</Button>
+          <Button className="mt-5" onClick={handleCheckout}>
+            Checkout
+          </Button>
         </div>
       </PopoverContent>
     </Popover>

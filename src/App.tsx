@@ -85,7 +85,7 @@ function App() {
       element: <ProductDetails />,
     },
     {
-      path: "/Orders",
+      path: "/orders",
       element: <Orders />,
     },
     {

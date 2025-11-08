@@ -12,6 +12,7 @@ import { ProductDetails } from "./Pages/ProductDetails";
 import { ThemeProvider } from "./Compo/theme-provider";
 import CoffeeShopReservation from "./Pages/CoffeeShopReservation";
 import Orders from "./Pages/Orders";
+import Receipt from "./Pages/Receipt";
 export type GlobalContextTypes = {
   state: GlobalStateTypes;
   handleAddToCart: (products: ProductTypes) => void;
@@ -93,7 +94,10 @@ function App() {
       element: <CoffeeShopReservation />,
     },
 
-    //CoffeeShopReservation
+    {
+      path: "/receipt/:orderId",
+      element: <Receipt />,
+    },
   ]);
 
   return (

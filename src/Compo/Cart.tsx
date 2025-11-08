@@ -9,8 +9,12 @@ import {
 import { OrderItemTypes, OrderTypes, ProductTypes } from "@/types";
 import { ShoppingCart } from "lucide-react";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom"; // add this import
+
 
 export function Cart() {
+    const navigate = useNavigate();
+
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
   const { state, handleDeleteFromCart, handleAddToCart, handleRemoveFromCart } =
@@ -60,6 +64,8 @@ export function Cart() {
 
       if (res.status === 201) {
         handleRemoveFromCart();
+        // Redirect to receipt page with the order ID
+        navigate(`/receipt/${res.data.id}`);
       }
 
       return res.data;

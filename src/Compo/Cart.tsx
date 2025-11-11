@@ -11,9 +11,8 @@ import { ShoppingCart } from "lucide-react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom"; // add this import
 
-
 export function Cart() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
@@ -39,15 +38,19 @@ export function Cart() {
     userId: "51f3f8e0-92df-4358-bcd8-5fe33a60f2ce",
     status: "Processing",
     items: [],
+    totalPrice: 0,
   };
   checkoutOrder.items = [] as OrderItemTypes[];
 
   Object.keys(groups).forEach((key) => {
     const products = groups[key];
+    const product = products[0]; // ✅ first product in the group
 
     checkoutOrder.items.push({
-      quantity: products.length,
       productId: key,
+      productName: product.name, // ✅ correct
+      quantity: products.length,
+      unitPrice: product.price, // ✅ correct
     });
   });
 

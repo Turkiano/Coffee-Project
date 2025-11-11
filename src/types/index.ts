@@ -42,6 +42,8 @@ export type OrderItemTypes = {
   quantity: number;
   price?: number;
   product?: ProductTypes; // ✅ include related product details
+  productName: string;
+  unitPrice: number;
 };
 
 export type OrderTypes = {
@@ -50,4 +52,5 @@ export type OrderTypes = {
   orderDate?: string;
   status: OrderStatus;
   items: OrderItemTypes[];
+  totalPrice: number;
 };

@@ -37,7 +37,22 @@ export default function Receipt() {
         <strong>Date:</strong>{" "}
         {order?.orderDate ? new Date(order.orderDate).toLocaleString() : "N/A"}
       </p>{" "}
-      <p className="mt-4">Items and total not available.</p>
+      <p>
+        <strong>User ID:</strong> {order.userId}{" "}
+      </p>
+<h3 className="mt-4 font-semibold">Items:</h3>
+      <ul className="mt-2 space-y-2">
+        {order.items.map((item, i) => (
+          <li key={i} className="flex justify-between">
+            <span>
+              {item.productName} × {item.quantity}
+            </span>
+            <span>{item.unitPrice} SAR</span>
+          </li>
+        ))}
+      </ul>     
+      <p className="font-bold mt-3">Total: {order.totalPrice} SAR</p>
+
     </div>
   );
 }

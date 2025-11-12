@@ -1,8 +1,6 @@
 import api from "@/api";
 import { GlobalContext } from "@/App";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-
 import {
   Popover,
   PopoverTrigger,
@@ -11,12 +9,10 @@ import {
 import { OrderItemTypes, OrderTypes, ProductTypes } from "@/types";
 import { ShoppingCart } from "lucide-react";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom"; // add this import
+import { useNavigate } from "react-router-dom";
 
 export function Cart() {
   const navigate = useNavigate();
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [checkoutError, setCheckoutError] = useState("");
 
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
@@ -32,37 +28,40 @@ export function Cart() {
     {} as { [productId: string]: ProductTypes[] },
   );
 
-  //to get the total cart
+  // Calculate total price
   let total = 0;
   state.cart.forEach((item) => {
     total += item.price;
   });
 
+  // Prepare items for checkout
+  const items: OrderItemTypes[] = Object.keys(groups).map((key) => {
+    const products = groups[key];
+    const product = products[0];
+
+    return {
+      productId: key,
+      productName: product.name,
+      quantity: products.length,
+      unitPrice: product.price,
+      // Add any other required properties from OrderItemTypes
+    };
+  });
+
+  // Create checkoutOrder with all required properties
   const checkoutOrder: OrderTypes = {
     userId: "51f3f8e0-92df-4358-bcd8-5fe33a60f2ce",
     status: "Processing",
-    items: [],
-    totalPrice: 0,
+    items: items,
+    totalPrice: total,
+    // Add any other required properties from OrderTypes
+    orderId: "", // or generate a temporary ID
+    orderDate: new Date().toISOString(),
   };
-  checkoutOrder.items = [] as OrderItemTypes[];
-
-  Object.keys(groups).forEach((key) => {
-    const products = groups[key];
-    const product = products[0]; // ✅ first product in the group
-
-    checkoutOrder.items.push({
-      productId: key,
-      productName: product.name, // ✅ correct
-      quantity: products.length,
-      unitPrice: product.price, // ✅ correct
-    });
-  });
 
   console.log("checkoutOrder: ", checkoutOrder);
 
   const handleCheckout = async () => {
-    setIsCheckingOut(true);
-    setCheckoutError("");
     try {
       const token = localStorage.getItem("token");
       const res = await api.post("/orders/checkout", checkoutOrder, {
@@ -70,29 +69,27 @@ export function Cart() {
           authorization: `bearer ${token}`,
         },
       });
+
       console.log("Checkout response:", res.data);
 
       if (res.status === 201) {
         handleRemoveFromCart();
-
+        
         // More robust way to get the order ID
         const orderId = res.data.id || res.data.orderId || res.data._id;
-
+        
         if (!orderId) {
           console.error("No order ID found in response:", res.data);
           throw new Error("No order ID received from server");
         }
-
-        // Redirect to receipt page with the order ID
-        navigate(`/receipt/${res.data.id}`);
+        
+        navigate(`/receipt/${orderId}`);
       }
 
       return res.data;
     } catch (error) {
       console.error(error);
       return Promise.reject(new Error("Something went wrong"));
-    } finally {
-      setIsCheckingOut(false);
     }
   };
 
@@ -111,9 +108,6 @@ export function Cart() {
           {Object.keys(groups).map((key) => {
             const products = groups[key];
             const product = products[0];
-
-            console.log("products: ", products);
-            console.log("product: ", product);
 
             return (
               <div
@@ -146,17 +140,9 @@ export function Cart() {
             );
           })}
           <p className="leading-none font-semibold mt-3"> Total: SAR {total}</p>
-          <Button
-            className="mt-5"
-            onClick={handleCheckout}
-            disabled={isCheckingOut || state.cart.length === 0}
-          >
-            {isCheckingOut ? "Processing..." : "Checkout"}
+          <Button className="mt-5" onClick={handleCheckout}>
             Checkout
           </Button>
-          {checkoutError && (
-            <p className="text-red-500 text-sm mt-2">{checkoutError}</p>
-          )}
         </div>
       </PopoverContent>
     </Popover>

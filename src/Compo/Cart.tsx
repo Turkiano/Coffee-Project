@@ -21,6 +21,19 @@ export function Cart() {
   const { state, handleDeleteFromCart, handleAddToCart, handleRemoveFromCart } =
     context;
 
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return (
+      <div
+        className="flex gap-1 cursor-pointer"
+        onClick={() => navigate("/login")}
+      >
+        <ShoppingCart />
+        <span>(0)</span>
+      </div>
+    );
+  }
+
   const groups = state.cart.reduce(
     (acc, obj) => {
       const key = obj.productId;
@@ -94,8 +107,6 @@ export function Cart() {
       console.log("Full checkout response:", res);
 
       if (res.status === 201) {
-        handleRemoveFromCart();
-
         // More robust order ID extraction
         const orderId =
           res.data.id || res.data.orderId || res.data._id || res.data.data?.id;
@@ -109,7 +120,8 @@ export function Cart() {
           );
           throw new Error("No order ID received from server");
         }
-
+        // Clear cart ONLY after successful navigation
+        handleRemoveFromCart();
         navigate(`/receipt/${orderId}`);
       } else {
         throw new Error(`Unexpected response status: ${res.status}`);

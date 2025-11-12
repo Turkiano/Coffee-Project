@@ -1,6 +1,8 @@
 import api from "@/api";
 import { GlobalContext } from "@/App";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+
 import {
   Popover,
   PopoverTrigger,
@@ -13,6 +15,8 @@ import { useNavigate } from "react-router-dom"; // add this import
 
 export function Cart() {
   const navigate = useNavigate();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState("");
 
   const context = useContext(GlobalContext);
   if (!context) throw Error("Context is missing!!");
@@ -57,6 +61,8 @@ export function Cart() {
   console.log("checkoutOrder: ", checkoutOrder);
 
   const handleCheckout = async () => {
+    setIsCheckingOut(true);
+    setCheckoutError("");
     try {
       const token = localStorage.getItem("token");
       const res = await api.post("/orders/checkout", checkoutOrder, {
@@ -64,9 +70,19 @@ export function Cart() {
           authorization: `bearer ${token}`,
         },
       });
+      console.log("Checkout response:", res.data);
 
       if (res.status === 201) {
         handleRemoveFromCart();
+
+        // More robust way to get the order ID
+        const orderId = res.data.id || res.data.orderId || res.data._id;
+
+        if (!orderId) {
+          console.error("No order ID found in response:", res.data);
+          throw new Error("No order ID received from server");
+        }
+
         // Redirect to receipt page with the order ID
         navigate(`/receipt/${res.data.id}`);
       }
@@ -75,6 +91,8 @@ export function Cart() {
     } catch (error) {
       console.error(error);
       return Promise.reject(new Error("Something went wrong"));
+    } finally {
+      setIsCheckingOut(false);
     }
   };
 
@@ -128,9 +146,17 @@ export function Cart() {
             );
           })}
           <p className="leading-none font-semibold mt-3"> Total: SAR {total}</p>
-          <Button className="mt-5" onClick={handleCheckout}>
+          <Button
+            className="mt-5"
+            onClick={handleCheckout}
+            disabled={isCheckingOut || state.cart.length === 0}
+          >
+            {isCheckingOut ? "Processing..." : "Checkout"}
             Checkout
           </Button>
+          {checkoutError && (
+            <p className="text-red-500 text-sm mt-2">{checkoutError}</p>
+          )}
         </div>
       </PopoverContent>
     </Popover>

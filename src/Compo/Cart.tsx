@@ -25,7 +25,7 @@ export function Cart() {
       const curGroup = acc[key] ?? [];
       return { ...acc, [key]: [...curGroup, obj] };
     },
-    {} as { [productId: string]: ProductTypes[] },
+    {} as { [productId: string]: ProductTypes[] },//
   );
 
   // Calculate total price

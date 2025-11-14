@@ -1,0 +1,96 @@
+[33m87cf5a2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mCheckOut_Working[m[33m)[m HEAD@{0}: pull origin CheckOut_Working: Merge made by the 'ort' strategy.
+[33mb8a5653[m HEAD@{1}: commit: hope this is the one inshallah
+[33mc1a5775[m HEAD@{2}: checkout: moving from OrdersToFrontend to CheckOut_Working
+[33mcaa0e1f[m[33m ([m[1;31morigin/OrdersToFrontend[m[33m, [m[1;32mOrdersToFrontend[m[33m)[m HEAD@{3}: checkout: moving from 9fee25950e1962626196ca5fcb8e707b695bc18e to OrdersToFrontend
+[33m9fee259[m HEAD@{4}: checkout: moving from main to 9fee25950e1962626196ca5fcb8e707b695bc18e
+[33m162a41a[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{5}: checkout: moving from 9fee25950e1962626196ca5fcb8e707b695bc18e to main
+[33m9fee259[m HEAD@{6}: checkout: moving from main to 9fee25950e1962626196ca5fcb8e707b695bc18e
+[33m162a41a[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{7}: commit: Increase the Vite warning limit
+[33m90425dc[m HEAD@{8}: checkout: moving from CheckOut_Working to main
+[33mc1a5775[m HEAD@{9}: commit: newBranch checkoutWorking
+[33m3007879[m[33m ([m[1;32mf43ddb6b55f314143d147cd22854ad956b3d99cd[m[33m)[m HEAD@{10}: checkout: moving from main to CheckOut_Working
+[33m90425dc[m HEAD@{11}: checkout: moving from CheckOut_Working to main
+[33m3007879[m[33m ([m[1;32mf43ddb6b55f314143d147cd22854ad956b3d99cd[m[33m)[m HEAD@{12}: checkout: moving from main to CheckOut_Working
+[33m90425dc[m HEAD@{13}: commit: Checkout_Working
+[33mca1621b[m HEAD@{14}: checkout: moving from CheckOut_Working to main
+[33m3007879[m[33m ([m[1;32mf43ddb6b55f314143d147cd22854ad956b3d99cd[m[33m)[m HEAD@{15}: checkout: moving from 300787935eef3f9ccd61fcb9dc71b29b6571200b to CheckOut_Working
+[33m3007879[m[33m ([m[1;32mf43ddb6b55f314143d147cd22854ad956b3d99cd[m[33m)[m HEAD@{16}: checkout: moving from main to 300787935eef3f9ccd61fcb9dc71b29b6571200b
+[33mca1621b[m HEAD@{17}: checkout: moving from caa0e1f152c30146a1e437c99a4d2062cda96b1c to main
+[33mcaa0e1f[m[33m ([m[1;31morigin/OrdersToFrontend[m[33m, [m[1;32mOrdersToFrontend[m[33m)[m HEAD@{18}: checkout: moving from main to caa0e1f152c30146a1e437c99a4d2062cda96b1c
+[33mca1621b[m HEAD@{19}: commit: testing connection
+[33m279033a[m HEAD@{20}: commit: added items in each order in Orders page
+[33mf43ddb6[m HEAD@{21}: commit: 1. Fix the Authentication Issue
+[33m9fee259[m HEAD@{22}: commit: adjusting cart to get items included in orders
+[33m3007879[m[33m ([m[1;32mf43ddb6b55f314143d147cd22854ad956b3d99cd[m[33m)[m HEAD@{23}: commit: fix: TypeScript errors in Cart.tsx
+[33m002361c[m HEAD@{24}: commit: handeling checkout error
+[33me6407ea[m HEAD@{25}: commit: fixed the oline error cause of OrderItemType was not including name and price of each product when
+[33m8087875[m HEAD@{26}: commit: updated the receipt page to show orderItems and Total price
+[33mad4aae8[m HEAD@{27}: commit: added Receipt page & used useNavigate in Cart.tsx + adjusted OrderItem types
+[33m446afb7[m HEAD@{28}: commit: Fix client-side routing for Vercel
+[33m234934a[m HEAD@{29}: commit: renaming the orders path
+[33m1e56027[m HEAD@{30}: commit: Fix client-side routing for Vercel
+[33mce8dec8[m HEAD@{31}: commit: fixing OrderItem typeScript error
+[33m3c19720[m HEAD@{32}: commit: Testing frontend 02
+[33m0301c51[m HEAD@{33}: commit: testing frontend
+[33mcaa0e1f[m[33m ([m[1;31morigin/OrdersToFrontend[m[33m, [m[1;32mOrdersToFrontend[m[33m)[m HEAD@{34}: merge OrdersToFrontend: Fast-forward
+[33m8e402ed[m HEAD@{35}: checkout: moving from OrdersToFrontend to main
+[33mcaa0e1f[m[33m ([m[1;31morigin/OrdersToFrontend[m[33m, [m[1;32mOrdersToFrontend[m[33m)[m HEAD@{36}: commit: testing01234
+[33m9f225f0[m HEAD@{37}: commit: testing0123
+[33m8e402ed[m HEAD@{38}: checkout: moving from main to OrdersToFrontend
+[33m8e402ed[m HEAD@{39}: commit: testing
+[33m4cadb27[m HEAD@{40}: commit: fixed orderypes + managed to orders in frontend
+[33mf07d988[m HEAD@{41}: commit: adding rules + changing the orders.tsx file into Pages folders
+[33m6a1ca75[m HEAD@{42}: pull origin main: Merge made by the 'ort' strategy.
+[33mf39a886[m HEAD@{43}: commit: adding the router config for Orders page
+[33mad781a8[m HEAD@{44}: commit: fetching orders into the frontend, without orderItems
+[33m505b5c3[m HEAD@{45}: commit: changed the promotion sentence & the CTA button
+[33m6e63de0[m HEAD@{46}: commit: updated the loading message for products & move the promotion section below the products
+[33mf6118b3[m HEAD@{47}: commit: added the new baseURL into the index.ts file
+[33mb361ff7[m HEAD@{48}: commit: NavBar has pitures of each product
+[33m958c6bd[m HEAD@{49}: commit: just fixed the search bar for desktop & mobile + the NavBar is global
+[33m0a6f402[m HEAD@{50}: commit: AboutUs page is working well
+[33m3cf18bc[m HEAD@{51}: commit: updated the locations pictures for the reservation page
+[33m215087f[m HEAD@{52}: commit: coffee reservation page is ready
+[33m43550b6[m HEAD@{53}: commit: just pictures for the reseverations
+[33mb404f45[m HEAD@{54}: reset: moving to b404f45
+[33m8da8faf[m HEAD@{55}: reset: moving to 8da8faf
+[33m8da8faf[m HEAD@{56}: reset: moving to HEAD
+[33m8da8faf[m HEAD@{57}: commit: step 01 OTP
+[33mb404f45[m HEAD@{58}: commit: product mobile view fixed
+[33mab365a0[m HEAD@{59}: commit: moblie navbar is ready
+[33mf3987b3[m HEAD@{60}: commit: navbar-desktop is ready
+[33mabddc96[m HEAD@{61}: commit: updated backend api base URL
+[33md012de6[m HEAD@{62}: commit: frontend project deployment is finito + just changed the baseURL
+[33mfb360dd[m HEAD@{63}: commit: getting ready for deployment
+[33m8842da6[m HEAD@{64}: commit: user dashboard delete button is workinng
+[33mdd0ca3e[m HEAD@{65}: commit: category dashbaord delete button is working
+[33m98a48f3[m HEAD@{66}: commit: dashboard for users & categories are working
+[33ma5971c5[m HEAD@{67}: commit: product image is working well
+[33m5231449[m HEAD@{68}: commit: almost done with styling home page
+[33mc7e80bd[m HEAD@{69}: commit: HeroSection + dark & light mode are working
+[33me874e51[m HEAD@{70}: commit: added the sectionHero
+[33m9feee7c[m HEAD@{71}: commit: Order entities working with cart well, only left with order items
+[33m1292ca7[m HEAD@{72}: commit: checkout is under progress
+[33mc9baa61[m HEAD@{73}: commit: finished with adding products to cart + adding the total cost
+[33mb79343d[m HEAD@{74}: commit: working on cart functionallties
+[33m05f9b83[m HEAD@{75}: commit: update Product Name is working, the rest later inshallah
+[33m7e92683[m HEAD@{76}: commit: Delete product is working + confirmation message
+[33mbaeb88e[m HEAD@{77}: commit: still working on the delete button
+[33mc70793b[m HEAD@{78}: commit: added Tabs into the dashboard
+[33ma4b2528[m HEAD@{79}: commit: updated product price - frontend
+[33m41b4f85[m HEAD@{80}: commit: search bar at the navBar is working
+[33m0d65588[m HEAD@{81}: commit: working on the search bar
+[33m7b6874b[m HEAD@{82}: commit: dynamic page is finally working
+[33mde60924[m HEAD@{83}: commit: add items to cart is working well + lenght notification
+[33m38ad76d[m HEAD@{84}: commit: NavBar is working, but not globally
+[33m123b09a[m HEAD@{85}: commit: still struggling with the Navigation Menu - Cart
+[33ma8d595c[m HEAD@{86}: commit: still working on nav bar to fix private routing
+[33mff8065f[m HEAD@{87}: commit: just finished updating all added products in a table inside the dashboard
+[33m7cd4153[m HEAD@{88}: commit: just finished applying the global context on cart
+[33mbdffe12[m HEAD@{89}: commit: finished declaring the global state context
+[33m7590cc4[m HEAD@{90}: commit: moving codes to the dashboard
+[33m1e5fc70[m HEAD@{91}: commit: finished storing data from frontend to backend
+[33m827be39[m HEAD@{92}: commit: adding functions to the Ui [handleChange & handleSubmit]
+[33mdc631f0[m HEAD@{93}: commit: finished styling a form to add products
+[33m80b488b[m HEAD@{94}: commit: finished styling the product card with button add to cart
+[33m205bf18[m HEAD@{

@@ -34,7 +34,7 @@ export default function AboutMeSection() {
         >
           <div className="flex items-center gap-3">
             <h1 className="text-xl sm:text-2xl md:text-4xl font-bold tracking-wide whitespace-nowrap">
-              Turki Saeeds
+              Turki Saeed**
             </h1>
 
             <a

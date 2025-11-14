@@ -55,7 +55,7 @@ export function Cart() {
     const product = products[0];
 
     // Calculate subtotal for this product group
-    const subtotal = products.reduce((sum, item) => sum + item.price, 0);
+    const subtotal = products.reduce((sum, item) => sum + item.price, 0); //
 
     return {
       productId: key,

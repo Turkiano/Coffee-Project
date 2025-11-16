@@ -91,14 +91,12 @@ export function Cart() {
         },
       });
 
-      console.log("Full checkout response:", res);
+      console.log("Full checkout response:", res.data);
 
       if (res.status === 201) {
         handleRemoveFromCart();
 
-        // More robust order ID extraction
-        const orderId =
-          res.data.id || res.data.orderId || res.data._id || res.data.data?.id;
+        const orderId = res.data.orderId; // **<-- CHANGE THIS LINE**
 
         console.log("Extracted orderId:", orderId);
 

@@ -73,6 +73,8 @@ export function Cart() {
 
     try {
       const token = localStorage.getItem("token");
+      console.log("TOKEN AT CHECKOUT:", token);
+
       if (!token) {
         throw new Error("No authentication token found");
       }

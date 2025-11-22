@@ -25,24 +25,21 @@ export function Login() {
     setError(null);
 
     try {
-      // Call the login API ONCE
       const res = await api.post("/users/login", user);
 
-      // Extract token from the backend response
-      const token = res.data.token;
       console.log("Full login response data:", res.data);
+
+      // res.data IS the token
+      const token = res.data;
 
       if (!token) {
         setError("Login failed: No token received.");
         return;
       }
 
-      // Save token for authenticated requests
+      // Save token
       localStorage.setItem("token", token);
 
-      console.log("Saved token:", token);
-
-      // Redirect to the homepage
       navigate("/");
     } catch (error) {
       console.error("Login error:", error);

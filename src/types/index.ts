@@ -36,21 +36,17 @@ export const Role = {
 export type OrderStatus = "Pending" | "Processing" | "Completed" | "Cancelled";
 
 export type OrderItemTypes = {
-  orderItemsId?: string;
-  orderId?: string;
   productId: string;
   quantity: number;
-  price?: number;
-  product?: ProductTypes; // ✅ include related product details
   productName: string;
   unitPrice: number;
 };
 
 export type OrderTypes = {
-  userId: string;
   orderId?: string;
   orderDate?: string;
   status: OrderStatus;
   items: OrderItemTypes[];
   totalPrice: number;
 };
+

@@ -1,16 +1,16 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { ChangeEvent, FormEvent, useState } from 'react';
-import api from '@/api';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Link, useNavigate } from "react-router-dom";
+import { ChangeEvent, FormEvent, useState } from "react";
+import api from "@/api";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export function Login() {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -26,10 +26,11 @@ export function Login() {
 
     try {
       // Call the login API ONCE
-      const res = await api.post('/users/login', user);
+      const res = await api.post("/users/login", user);
 
       // Extract token from the backend response
       const token = res.data.token;
+      console.log("Full login response data:", res.data);
 
       if (!token) {
         setError("Login failed: No token received.");
@@ -42,7 +43,7 @@ export function Login() {
       console.log("Saved token:", token);
 
       // Redirect to the homepage
-      navigate('/');
+      navigate("/");
     } catch (error) {
       console.error("Login error:", error);
       setError("Wrong email or password. Please try again.");
@@ -85,7 +86,9 @@ export function Login() {
 
           <p>
             Create an Account{" "}
-            <Link to="/signUp" className="text-blue-600">here</Link>
+            <Link to="/signUp" className="text-blue-600">
+              here
+            </Link>
           </p>
         </form>
       </div>

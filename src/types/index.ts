@@ -50,3 +50,13 @@ export type OrderTypes = {
   totalPrice: number;
 };
 
+export type OrderResponse = {
+  orderId: string;
+  userId: string;              // ⬅️ backend sends this
+  orderDate: string;
+  status: OrderStatus;
+  totalPrice: number;
+  items: OrderItemTypes[];
+};
+
+

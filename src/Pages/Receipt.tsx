@@ -1,5 +1,5 @@
 import api from "@/api";
-import { OrderTypes } from "@/types";
+import { OrderResponse } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
@@ -9,7 +9,7 @@ export default function Receipt() {
     data: order,
     isLoading,
     error,
-  } = useQuery<OrderTypes>({
+  } = useQuery<OrderResponse>({
     queryKey: ["order", orderId],
     queryFn: async () => {
       const token = localStorage.getItem("token");
@@ -38,7 +38,7 @@ export default function Receipt() {
         {order?.orderDate ? new Date(order.orderDate).toLocaleString() : "N/A"}
       </p>{" "}
       <p>
-        <strong>User ID:</strong> {order.userId}{" "}
+        <strong>User ID:</strong> {order.userId}
       </p>
 <h3 className="mt-4 font-semibold">Items:</h3>
       <ul className="mt-2 space-y-2">

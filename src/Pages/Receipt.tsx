@@ -14,7 +14,8 @@ export default function Receipt() {
     queryFn: async () => {
       const token = localStorage.getItem("token");
       const res = await api.get(`/orders/${orderId}`, {
-        headers: { authorization: `bearer ${token}` },
+
+        headers: { authorization: `Bearer ${token}` },
       });
       return res.data;
     },

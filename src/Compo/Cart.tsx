@@ -16,9 +16,9 @@ export function Cart() {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
 
-  const token = localStorage.getItem("token");
-console.log("TOKEN AT CHECKOUT:", token);
-if (!token) throw new Error("No authentication token found");
+//   const token = localStorage.getItem("token");
+// console.log("TOKEN AT CHECKOUT:", token);
+// if (!token) throw new Error("No authentication token found");
 
 
   const context = useContext(GlobalContext);
